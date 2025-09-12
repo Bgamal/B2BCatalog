@@ -420,25 +420,32 @@ export interface ApiProductProduct extends Struct.CollectionTypeSchema {
     createdBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     description: Schema.Attribute.Text;
+    images: Schema.Attribute.Media<'images', true>;
+    isActive: Schema.Attribute.Boolean & Schema.Attribute.DefaultTo<true>;
     locale: Schema.Attribute.String & Schema.Attribute.Private;
     localizations: Schema.Attribute.Relation<
       'oneToMany',
       'api::product.product'
     > &
       Schema.Attribute.Private;
+    maxOrderQuantity: Schema.Attribute.Integer;
+    minOrderQuantity: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<1>;
     name: Schema.Attribute.String & Schema.Attribute.Required;
     price: Schema.Attribute.Decimal & Schema.Attribute.Required;
     publishedAt: Schema.Attribute.DateTime;
     sku: Schema.Attribute.String &
       Schema.Attribute.Required &
       Schema.Attribute.Unique;
+    specifications: Schema.Attribute.JSON;
     stock: Schema.Attribute.Integer & Schema.Attribute.Required;
     supplier: Schema.Attribute.Relation<'manyToOne', 'api::supplier.supplier'> &
       Schema.Attribute.Required;
+    tags: Schema.Attribute.JSON;
     updatedAt: Schema.Attribute.DateTime;
     updatedBy: Schema.Attribute.Relation<'oneToOne', 'admin::user'> &
       Schema.Attribute.Private;
     viewCount: Schema.Attribute.Integer & Schema.Attribute.DefaultTo<0>;
+    wholesalePrice: Schema.Attribute.Decimal;
   };
 }
 

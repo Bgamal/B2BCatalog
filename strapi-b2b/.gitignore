@@ -134,8 +134,8 @@ public/uploads/*
 !public/uploads/.gitkeep
 
 # Strapi configuration
-config/database.js
-config/server.js
+# config/database.js
+# config/server.js
 
 # Environment variables
 .env
