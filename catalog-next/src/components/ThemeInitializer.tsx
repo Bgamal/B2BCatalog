@@ -2,7 +2,11 @@
 
 import { useEffect, useState } from 'react';
 
-export default function ThemeInitializer() {
+interface ThemeInitializerProps {
+  children?: React.ReactNode;
+}
+
+export default function ThemeInitializer({ children }: ThemeInitializerProps = {}) {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -24,6 +28,6 @@ export default function ThemeInitializer() {
     setInitialTheme();
   }, []);
 
-  // Don't render anything, just initialize the theme
-  return null;
+  // Don't render children, just initialize the theme
+  return children || null;
 }
