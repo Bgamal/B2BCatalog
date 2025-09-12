@@ -252,7 +252,7 @@ export default function TrendingPage() {
                           <strong className="text-primary h4">
                             {formatCurrency(product.price)}
                           </strong>
-                          <a href={`/products/${product.id}`} className="btn btn-primary">
+                          <a href={`/product/${product.id}`} className="btn btn-primary">
                             View Product
                           </a>
                         </div>
@@ -316,7 +316,7 @@ export default function TrendingPage() {
                           <strong className="text-primary">
                             {formatCurrency(product.price)}
                           </strong>
-                          <a href={`/products/${product.id}`} className="btn btn-primary btn-sm">
+                          <a href={`/product/${product.id}`} className="btn btn-primary btn-sm">
                             View
                           </a>
                         </div>
