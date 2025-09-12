@@ -7,14 +7,13 @@ const API_URL = `${API_BASE}/api`;
 
 type Category = {
   id: number;
-  attributes: {
     name: string;
     slug: string;
     description?: string | null;
     createdAt: string;
     updatedAt: string;
     publishedAt: string;
-  };
+ 
 };
 
 type ApiResponse = {
@@ -119,15 +118,15 @@ export default function CategoriesPage() {
             <Col key={category?.id}>
               <Card className="h-100">
                 <Card.Body>
-                  <Card.Title>{category?.attributes?.name || 'Unnamed Category'}</Card.Title>
-                  {category?.attributes?.description && (
+                  <Card.Title>{category?.name || 'Unnamed Category'}</Card.Title>
+                  {category?.description && (
                     <Card.Text className="text-muted">
-                      {category.attributes.description}
+                      {category.description}
                     </Card.Text>
                   )}
                   <Card.Text>
                     <small className="text-muted">
-                      Slug: {category?.attributes?.slug || 'no-slug'}
+                      Slug: {category?.slug || 'no-slug'}
                     </small>
                   </Card.Text>
                 </Card.Body>

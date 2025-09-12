@@ -1,11 +1,57 @@
 'use client';
 
-import { useEffect, useState, useMemo, Suspense } from 'react';
+import { useEffect, useState, useMemo, Suspense, useCallback } from 'react';
+import { useRouter } from 'next/navigation';
 import { Card, Button, Form, Row, Col, Container, Badge, InputGroup, Spinner, Alert } from 'react-bootstrap';
-import { FaSearch, FaShoppingCart, FaFilter, FaSort, FaStar } from 'react-icons/fa';
+import { FaSearch, FaShoppingCart, FaFilter, FaSort, FaStar, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
+import Slider from 'react-slick';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
 const API_BASE = process.env.NEXT_PUBLIC_API_BASE || 'http://localhost:1337';
 const API_URL = `${API_BASE}/api`;
+
+// Custom arrow components for the slider
+const SampleNextArrow = (props: any) => {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={className}
+      style={{ ...style, display: 'block', right: '5px', zIndex: 1 }}
+      onClick={onClick}
+    >
+      <FaChevronRight className="text-dark" />
+    </div>
+  );
+};
+
+const SamplePrevArrow = (props: any) => {
+  const { className, style, onClick } = props;
+  return (
+    <div
+      className={className}
+      style={{ ...style, display: 'block', left: '5px', zIndex: 1 }}
+      onClick={onClick}
+    >
+      <FaChevronLeft className="text-dark" />
+    </div>
+  );
+};
+
+// Slider settings
+const sliderSettings = {
+  dots: false,
+  infinite: true,
+  speed: 500,
+  slidesToShow: 1,
+  slidesToScroll: 1,
+  nextArrow: <SampleNextArrow />,
+  prevArrow: <SamplePrevArrow />,
+  className: 'product-image-slider',
+  autoplay: true,
+  autoplaySpeed: 3000,
+  pauseOnHover: true
+};
 
 type ImageFormat = {
   ext: string;
@@ -24,9 +70,9 @@ type ImageFormat = {
 };
 
 type Image = {
-  data: {
+ 
     id: number;
-    attributes: {
+  
       name: string;
       alternativeText: string | null;
       caption: string | null;
@@ -51,25 +97,25 @@ type Image = {
       };
       createdAt: string;
       updatedAt: string;
-    };
-  } | null;
+    
+ 
 };
 
 type Category = {
   id: number;
-  attributes: {
+ 
     name: string;
     slug: string;
     description: string | null;
     createdAt: string;
     updatedAt: string;
     publishedAt: string;
-  };
+ 
 };
 
 type Supplier = {
   id: number;
-  attributes: {
+ 
     name: string;
     email: string | null;
     phone: string | null;
@@ -77,12 +123,12 @@ type Supplier = {
     createdAt: string;
     updatedAt: string;
     publishedAt: string;
-  };
+ 
 };
 
 type Product = {
   id: number;
-  attributes: {
+ 
     name: string;
     sku: string;
     description: string | null;
@@ -93,14 +139,14 @@ type Product = {
     createdAt: string;
     updatedAt: string;
     publishedAt: string;
-    image: Image;
+    images: Image[];
     category: {
       data: Category | null;
     };
     supplier: {
       data: Supplier | null;
     };
-  };
+ 
 };
 
 type ApiResponse<T> = {
@@ -116,7 +162,13 @@ type ApiResponse<T> = {
 };
 
 export default function ProductsPage() {
-  const [products, setProducts] = useState<{ id: number; attributes: any }[]>([]);
+  const router = useRouter();
+  
+  const handleProductClick = useCallback((productId: number) => {
+    router.push(`/product/${productId}`);
+  }, [router]);
+
+  const [products, setProducts] =useState<Product[]>([]);
   const [categories, setCategories] = useState<Category[]>([]);
   const [suppliers, setSuppliers] = useState<Supplier[]>([]);
   const [q, setQ] = useState('');
@@ -146,17 +198,17 @@ export default function ProductsPage() {
         // Log the API URL being used
         console.log('Fetching data from API:', API_URL);
         
-        // Check if API is reachable
-        const isApiReachable = await fetch(API_URL, { method: 'HEAD' })
-          .then(res => res.ok)
-          .catch(() => false);
+        // // Check if API is reachable
+        // const isApiReachable = await fetch(API_URL, { method: 'HEAD' })
+        //   .then(res => res.ok)
+        //   .catch(() => false);
 
-        if (!isApiReachable) {
-          console.error('API server is not running or not reachable at', API_URL);
-          setError('Unable to connect to the server. Please make sure the Strapi server is running.');
-          setIsLoading(false);
-          return;
-        }
+        // if (!isApiReachable) {
+        //   console.error('API server is not running or not reachable at', API_URL);
+        //   setError('Unable to connect to the server. Please make sure the Strapi server is running.');
+        //   setIsLoading(false);
+        //   return;
+        // }
 
         // Fetch products with related data
         const endpoints = [
@@ -164,6 +216,7 @@ export default function ProductsPage() {
           { name: 'categories', url: `${API_URL}/categories`, required: false },
           { name: 'suppliers', url: `${API_URL}/suppliers`, required: false }
         ];
+        console.log('Fetching data from API:', endpoints[0].url);
 
         const responses = await Promise.allSettled(
           endpoints.map(endpoint => 
@@ -227,21 +280,21 @@ export default function ProductsPage() {
 
     return products
       .filter(product => {
-        if (!product?.attributes) return false;
+        if (!product) return false;
         
         const searchTerm = q?.toLowerCase() || '';
-        const productName = product.attributes.name?.toLowerCase() || '';
-        const productSku = product.attributes.sku?.toLowerCase() || '';
-        const productDescription = product.attributes.description?.toLowerCase() || '';
+        const productName = product.name?.toLowerCase() || '';
+        const productSku = product.sku?.toLowerCase() || '';
+        const productDescription = product.description?.toLowerCase() || '';
         
         const matchesSearch = 
           productName.includes(searchTerm) ||
           productSku.includes(searchTerm) ||
           productDescription.includes(searchTerm);
         
-        const matchesCategory = !categoryId || product.attributes.category?.data?.id === categoryId;
-        const matchesSupplier = !supplierId || product.attributes.supplier?.data?.id === supplierId;
-        const productPrice = product.attributes.price || 0;
+        const matchesCategory = !categoryId || product.category?.data?.id === categoryId;
+        const matchesSupplier = !supplierId || product.supplier?.data?.id === supplierId;
+        const productPrice = product.price || 0;
         const matchesPrice = productPrice >= priceRange[0] && productPrice <= priceRange[1];
         
         return matchesSearch && matchesCategory && matchesSupplier && matchesPrice;
@@ -249,15 +302,15 @@ export default function ProductsPage() {
       .sort((a, b) => {
         switch (sortBy) {
           case 'name-asc':
-            return a.attributes.name.localeCompare(b.attributes.name);
+            return a.name.localeCompare(b.name);
           case 'name-desc':
-            return b.attributes.name.localeCompare(a.attributes.name);
+            return b.name.localeCompare(a.name);
           case 'price-asc':
-            return a.attributes.price - b.attributes.price;
+            return a.price - b.price;
           case 'price-desc':
-            return b.attributes.price - a.attributes.price;
+            return b.price - a.price;
           case 'rating-desc':
-            return (b.attributes.rating || 0) - (a.attributes.rating || 0);
+            return (b.rating || 0) - (a.rating || 0);
           default:
             return 0;
         }
@@ -375,7 +428,7 @@ export default function ProductsPage() {
                     <option value="">All Categories</option>
                     {Array.isArray(categories) && categories.map(category => {
                       const categoryId = category.id;
-                      const categoryName = category.attributes?.name || 'Unnamed Category';
+                      const categoryName = category?.name || 'Unnamed Category';
                       return (
                         <option key={categoryId} value={categoryId}>
                           {categoryName}
@@ -396,7 +449,7 @@ export default function ProductsPage() {
                     <option value="">All Suppliers</option>
                     {Array.isArray(suppliers) && suppliers.map(supplier => {
                       const supplierId = supplier.id;
-                      const supplierName = supplier.attributes?.name || 'Unnamed Supplier';
+                      const supplierName = supplier?.name || 'Unnamed Supplier';
                       return (
                         <option key={supplierId} value={supplierId}>
                           {supplierName}
@@ -468,15 +521,40 @@ export default function ProductsPage() {
               <Row xs={1} md={2} lg={3} className="g-4">
                 {filteredProducts.map((product: Product) => (
                   <Col key={product.id}>
-                    <Card className="h-100 product-card">
-                      <div className="position-relative" style={{ height: '200px', backgroundColor: '#f8f9fa', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                        <div className="text-muted">Product Image</div>
-                        {product.attributes.stock <= 0 && (
+                    <Card 
+                      className="h-100 product-card cursor-pointer" 
+                      onClick={() => handleProductClick(product.id)}
+                      style={{ cursor: 'pointer' }}
+                    >
+                      <div className="position-relative" style={{ height: '200px', backgroundColor: '#f8f9fa' }}>
+                        {product.images && product.images.length > 0 ? (
+                          <Slider {...sliderSettings}>
+                            {product.images.map((image, index) => (
+                              <div key={index} className="d-flex align-items-center justify-content-center" style={{ height: '200px' }}>
+                                <img 
+                                  src={`${API_BASE}${image.url}`} 
+                                  alt={`${product.name} - ${index + 1}`}
+                                  style={{ 
+                                    maxHeight: '100%', 
+                                    maxWidth: '100%', 
+                                    objectFit: 'contain',
+                                    margin: '0 auto'
+                                  }} 
+                                />
+                              </div>
+                            ))}
+                          </Slider>
+                        ) : (
+                          <div className="w-100 h-100 d-flex align-items-center justify-content-center">
+                            <div className="text-muted">No Image Available</div>
+                          </div>
+                        )}
+                        {product.stock <= 0 && (
                           <div className="position-absolute top-0 end-0 m-2">
                             <Badge bg="danger">Out of Stock</Badge>
                           </div>
                         )}
-                        {product.attributes.rating && product.attributes.rating >= 4.5 && (
+                        {product.rating && product.rating >= 4.5 && (
                           <div className="position-absolute top-0 start-0 m-2">
                             <Badge bg="warning" text="dark">
                               <FaStar className="me-1" /> Top Rated
@@ -486,21 +564,21 @@ export default function ProductsPage() {
                       </div>
                       <Card.Body className="d-flex flex-column">
                         <div className="mb-2">
-                          <Card.Title className="h5 mb-1">{product.attributes.name}</Card.Title>
-                          <Card.Subtitle className="text-muted mb-2">{product.attributes.sku}</Card.Subtitle>
-                          {product.attributes.rating !== undefined && product.attributes.rating !== null && (
+                          <Card.Title className="h5 mb-1">{product.name}</Card.Title>
+                          <Card.Subtitle className="text-muted mb-2">{product.sku}</Card.Subtitle>
+                          {product.rating !== undefined && product.rating !== null && (
                             <div className="d-flex align-items-center mb-2">
-                              {renderRating(product.attributes.rating)}
-                              <small className="ms-2 text-muted">({product.attributes.rating?.toFixed(1)})</small>
+                              {renderRating(product.rating)}
+                              <small className="ms-2 text-muted">({product.rating?.toFixed(1)})</small>
                             </div>
                           )}
-                          <div className="h4 mb-3 text-primary">{formatPrice(product.attributes.price)}</div>
+                          <div className="h4 mb-3 text-primary">{formatPrice(product.price)}</div>
                         </div>
                         <div className="mt-auto">
                           <div className="d-flex justify-content-between align-items-center">
                             <div>
-                              {product.attributes.stock > 0 ? (
-                                <span className="text-success">In Stock ({product.attributes.stock})</span>
+                              {product.stock > 0 ? (
+                                <span className="text-success">In Stock ({product.stock})</span>
                               ) : (
                                 <span className="text-danger">Out of Stock</span>
                               )}
@@ -508,7 +586,7 @@ export default function ProductsPage() {
                             <Button 
                               variant="primary" 
                               size="sm"
-                              disabled={product.attributes.stock <= 0}
+                              disabled={product.stock <= 0}
                             >
                               <FaShoppingCart className="me-1" /> Add to Cart
                             </Button>

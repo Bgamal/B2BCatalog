@@ -19,7 +19,7 @@ export default function SupplierPage({ params }: { params: { id: string } }) {
 		<div>
 			<h2>Supplier {params.id}</h2>
 			<ul>
-				{products.map(p => <li key={p.id}><a href={`/product/${p.id}`}>{p.name} ({p.sku})</a></li>)}
+				{products.map(p => <li key={p.id}><a href={`/products/${p.id}`}>{p.name} ({p.sku})</a></li>)}
 			</ul>
 		</div>
 	);

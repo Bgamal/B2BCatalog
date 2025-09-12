@@ -2,6 +2,7 @@
 
 import { Container, Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import Link from 'next/link';
+import Logo from './Logo';
 
 export default function Navigation({ children }: { children: React.ReactNode }) {
   const currentYear = new Date().getFullYear();
@@ -11,7 +12,9 @@ export default function Navigation({ children }: { children: React.ReactNode }) 
       {/* Navigation */}
       <Navbar bg="primary" variant="dark" expand="lg" className="shadow-sm" collapseOnSelect>
         <Container>
-          <Navbar.Brand as={Link} href="/" className="fw-bold">B2B Catalog</Navbar.Brand>
+          <Navbar.Brand as="div" className="d-flex align-items-center">
+            <Logo />
+          </Navbar.Brand>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
             <Nav className="me-auto">

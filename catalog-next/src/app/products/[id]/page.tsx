@@ -19,19 +19,13 @@ type Product = {
     };
   }>;
   category?: {
-  
-      id: number;
-     
-        name: string;
-        slug: string;
-   
+    id: number;
+    name: string;
+    slug: string;
   };
   supplier?: {
-    
-      id: number;
-     
-        name: string;
-     
+    id: number;
+    name: string;
   };
 };
 
@@ -39,17 +33,13 @@ const API = (process.env.NEXT_PUBLIC_API_BASE || 'http://localhost:1337') + '/ap
 
 async function getProduct(id: string): Promise<Product | null> {
   try {
-	debugger;
-	console.log('Fetching product:', id);
-    const res = await fetch(`${API}/products/${id}?populate=*`, {
-
-      next: { revalidate: 60 }, // Revalidate every 60 seconds
+    const res = await fetch(`${API}/product/${id}?populate=*`, {
+      next: { revalidate: 60 },
       headers: {
         'Content-Type': 'application/json',
       },
-	 
     });
-	
+    
     if (!res.ok) {
       console.error(`Failed to fetch product: ${res.status} ${res.statusText}`);
       if (res.status === 404) return null;
@@ -57,9 +47,8 @@ async function getProduct(id: string): Promise<Product | null> {
     }
     
     const json = await res.json();
-    console.log('Product API Response:', json); // Debug log
-	debugger;
-    return json.data ? { id: json.data.id, ...json.data } : null;
+    console.log('Product API Response:', json);
+    return json?.data?.attributes ? { id: json.data.id, ...json.data.attributes } : null;
   } catch (error) {
     console.error('Error fetching product:', error);
     return null;
@@ -67,8 +56,7 @@ async function getProduct(id: string): Promise<Product | null> {
 }
 
 export default async function ProductPage({ params }: { params: { id: string } }) {
-  // Ensure params is properly awaited
-  const { id } = await params;
+  const { id } = params;
   const product = await getProduct(id);
   
   if (!product) {
@@ -149,7 +137,6 @@ export default async function ProductPage({ params }: { params: { id: string } }
 }
 
 export async function generateMetadata({ params }: { params: { id: string } }) {
-  // Properly await the params
   const { id } = params;
   const product = await getProduct(id);
   
