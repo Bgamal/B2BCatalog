@@ -532,7 +532,7 @@ export default function ProductsPage() {
                             {product.images.map((image, index) => (
                               <div key={index} className="d-flex align-items-center justify-content-center" style={{ height: '200px' }}>
                                 <img 
-                                  src={`${API_BASE}${image.url}`} 
+                                  src={`${API_BASE}${image.formats?.thumbnail?.url || image.url}`} 
                                   alt={`${product.name} - ${index + 1}`}
                                   style={{ 
                                     maxHeight: '100%', 
