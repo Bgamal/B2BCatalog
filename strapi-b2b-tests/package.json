@@ -1,0 +1,38 @@
+{
+  "name": "strapi-b2b-tests",
+  "version": "1.0.0",
+  "description": "Unit tests for Strapi B2B catalog application",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "test:api": "jest tests/api",
+    "test:models": "jest tests/models"
+  },
+  "keywords": [
+    "strapi",
+    "testing",
+    "jest",
+    "b2b",
+    "catalog"
+  ],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "@babel/core": "^7.23.0",
+    "@babel/preset-env": "^7.23.0",
+    "@types/jest": "^29.5.5",
+    "@types/supertest": "^2.0.12",
+    "babel-jest": "^29.7.0",
+    "jest": "^29.7.0",
+    "supertest": "^6.3.3",
+    "ts-jest": "^29.1.1",
+    "typescript": "^5.2.2"
+  },
+  "dependencies": {
+    "@strapi/strapi": "^4.15.0",
+    "express": "^4.21.2",
+    "sqlite3": "^5.1.6"
+  }
+}
