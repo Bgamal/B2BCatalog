@@ -1,118 +1,89 @@
-"use client";
-import { useEffect, useMemo, useState } from 'react';
+'use client';
 
-type Category = { id: number; name: string };
-type Supplier = { id: number; name: string };
+import MostViewedProducts from '@/components/MostViewedProducts';
+import { FaBox, FaEye, FaChartLine, FaArrowRight } from 'react-icons/fa';
 
-type Product = {
-	id: number;
-	name: string;
-	sku: string;
-	price: number;
-	stock: number;
-	categoryId?: number;
-	supplierId?: number;
-};
+export default function Home() {
+  return (
+    <div className="container py-4">
+      {/* Hero Section */}
+      <div className="row mb-5">
+        <div className="col-12">
+          <div className="bg-primary text-white rounded-3 p-5 text-center">
+            <h1 className="display-4 fw-bold mb-3">Welcome to B2B Catalog</h1>
+            <p className="lead mb-4">Your one-stop solution for all business procurement needs</p>
+            <div className="d-flex justify-content-center gap-3">
+              <a href="/products" className="btn btn-light btn-lg">
+                <FaBox className="me-2" />
+                Browse Products
+              </a>
+              <a href="/trending" className="btn btn-outline-light btn-lg">
+                <FaChartLine className="me-2" />
+                View Trending
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
 
-const API = (process.env.NEXT_PUBLIC_API_BASE || 'http://localhost:1337') + '/api';
+      {/* Quick Stats */}
+      <div className="row mb-5">
+        <div className="col-md-4">
+          <div className="card text-center h-100">
+            <div className="card-body">
+              <FaBox className="text-primary mb-3" size={32} />
+              <h5 className="card-title">Extensive Catalog</h5>
+              <p className="card-text text-muted">Browse thousands of products across multiple categories</p>
+            </div>
+          </div>
+        </div>
+        <div className="col-md-4">
+          <div className="card text-center h-100">
+            <div className="card-body">
+              <FaEye className="text-info mb-3" size={32} />
+              <h5 className="card-title">Trending Insights</h5>
+              <p className="card-text text-muted">Discover what other businesses are viewing and purchasing</p>
+            </div>
+          </div>
+        </div>
+        <div className="col-md-4">
+          <div className="card text-center h-100">
+            <div className="card-body">
+              <FaChartLine className="text-success mb-3" size={32} />
+              <h5 className="card-title">Analytics Dashboard</h5>
+              <p className="card-text text-muted">Track product performance and inventory insights</p>
+            </div>
+          </div>
+        </div>
+      </div>
 
-function mapStrapiList<T>(res: any, mapper: (item: any) => T): T[] {
-	if (!res || !Array.isArray(res.data)) return [];
-	return res.data.filter((item: any) => item && item.attributes).map(mapper);
+      {/* Most Viewed Products Section */}
+      <div className="row mb-5">
+        <div className="col-12">
+          <MostViewedProducts limit={6} showTitle={true} layout="grid" />
+        </div>
+      </div>
+
+      {/* Call to Action */}
+      <div className="row">
+        <div className="col-12">
+          <div className="card bg-light">
+            <div className="card-body text-center py-5">
+              <h3 className="mb-3">Ready to explore our full catalog?</h3>
+              <p className="text-muted mb-4">Discover thousands of products tailored for your business needs</p>
+              <div className="d-flex justify-content-center gap-3">
+                <a href="/products" className="btn btn-primary btn-lg">
+                  View All Products
+                  <FaArrowRight className="ms-2" />
+                </a>
+                <a href="/categories" className="btn btn-outline-primary btn-lg">
+                  Browse Categories
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
 }
-
-export default function ProductsPage() {
-	const [products, setProducts] = useState<Product[]>([]);
-	const [categories, setCategories] = useState<Category[]>([]);
-	const [suppliers, setSuppliers] = useState<Supplier[]>([]);
-	const [q, setQ] = useState('');
-	const [categoryId, setCategoryId] = useState<number | ''>('');
-	const [supplierId, setSupplierId] = useState<number | ''>('');
-	const [sortBy, setSortBy] = useState('');
-
-	useEffect(() => {
-		fetch(`${API}/categories?pagination[limit]=100`)
-			.then(r => r.json())
-			.then(json => {
-				console.log('Categories response:', json);
-				setCategories(mapStrapiList(json, (i) => ({ id: i.id, name: i.attributes?.name || 'Unknown' })));
-			})
-			.catch(err => console.error('Categories fetch error:', err));
-		fetch(`${API}/suppliers?pagination[limit]=100`)
-			.then(r => r.json())
-			.then(json => {
-				console.log('Suppliers response:', json);
-				setSuppliers(mapStrapiList(json, (i) => ({ id: i.id, name: i.attributes?.name || 'Unknown' })));
-			})
-			.catch(err => console.error('Suppliers fetch error:', err));
-	}, []);
-
-	const queryString = useMemo(() => {
-		const params = new URLSearchParams();
-		params.set('populate', '*');
-		if (q) params.set('filters[$or][0][name][$containsi]', q);
-		if (q) params.set('filters[$or][1][sku][$containsi]', q);
-		if (categoryId) params.set('filters[category][id][$eq]', String(categoryId));
-		if (supplierId) params.set('filters[supplier][id][$eq]', String(supplierId));
-		switch (sortBy) {
-			case 'price_asc': params.set('sort', 'price:asc'); break;
-			case 'price_desc': params.set('sort', 'price:desc'); break;
-			case 'stock_desc': params.set('sort', 'stock:desc'); break;
-			case 'views_desc': params.set('sort', 'viewCount:desc'); break;
-			default: params.set('sort', 'name:asc'); break;
-		}
-		params.set('pagination[pageSize]', '100');
-		return params.toString();
-	}, [q, categoryId, supplierId, sortBy]);
-
-	useEffect(() => {
-		fetch(`${API}/products?${queryString}`)
-			.then(r => r.json())
-			.then(json => {
-				console.log('Products response:', json);
-				setProducts(mapStrapiList(json, (i) => ({
-					id: i.id,
-					name: i.attributes?.name || 'Unknown Product',
-					sku: i.attributes?.sku || 'N/A',
-					price: i.attributes?.price || 0,
-					stock: i.attributes?.stock || 0,
-					categoryId: i.attributes?.category?.data?.id,
-					supplierId: i.attributes?.supplier?.data?.id
-				})));
-			})
-			.catch(err => console.error('Products fetch error:', err));
-	}, [queryString]);
-
-	return (
-		<div>
-			<div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', marginBottom: 12 }}>
-				<input placeholder="Search..." value={q} onChange={e => setQ(e.target.value)} />
-				<select value={categoryId} onChange={e => setCategoryId(e.target.value ? Number(e.target.value) : '')}>
-					<option value="">All categories</option>
-					{categories.map(c => <option key={c.id} value={c.id}>{c.name}</option>)}
-				</select>
-				<select value={supplierId} onChange={e => setSupplierId(e.target.value ? Number(e.target.value) : '')}>
-					<option value="">All suppliers</option>
-					{suppliers.map(s => <option key={s.id} value={s.id}>{s.name}</option>)}
-				</select>
-				<select value={sortBy} onChange={e => setSortBy(e.target.value)}>
-					<option value="">Sort: Name</option>
-					<option value="price_asc">Price ↑</option>
-					<option value="price_desc">Price ↓</option>
-					<option value="stock_desc">Stock ↓</option>
-					<option value="views_desc">Views ↓</option>
-				</select>
-			</div>
-			<ul style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(260px, 1fr))', gap: 12, listStyle: 'none', padding: 0 }}>
-				{products.map(p => (
-					<li key={p.id} style={{ border: '1px solid #eee', borderRadius: 8, padding: 12 }}>
-						<div style={{ fontWeight: 600 }}>{p.name}</div>
-						<div style={{ color: '#666' }}>{p.sku}</div>
-						<div style={{ marginTop: 6 }}>${p.price.toFixed(2)} · Stock: {p.stock}</div>
-						<a href={`/product/${p.id}`}>View</a>
-					</li>
-				))}
-			</ul>
-		</div>
-	);
-} 
