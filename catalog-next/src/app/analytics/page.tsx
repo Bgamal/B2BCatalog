@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState, useMemo } from 'react';
-import { FaEye, FaBox, FaDollarSign, FaTrendingUp, FaTrendingDown, FaEquals } from 'react-icons/fa';
+import { FaEye, FaBox, FaDollarSign, FaArrowUp, FaArrowDown, FaMinus } from 'react-icons/fa';
 
 const API = (process.env.NEXT_PUBLIC_API_BASE || 'http://localhost:1337') + '/api';
 
