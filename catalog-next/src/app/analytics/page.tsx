@@ -150,9 +150,9 @@ export default function AnalyticsPage() {
   };
 
   const getStockStatus = (stock: number) => {
-    if (stock === 0) return { variant: 'danger', text: 'Out of Stock', icon: <FaTrendingDown /> };
-    if (stock <= 5) return { variant: 'warning', text: 'Low Stock', icon: <FaEquals /> };
-    return { variant: 'success', text: 'In Stock', icon: <FaTrendingUp /> };
+    if (stock === 0) return { variant: 'danger', text: 'Out of Stock', icon: <FaArrowDown /> };
+    if (stock <= 5) return { variant: 'warning', text: 'Low Stock', icon: <FaMinus /> };
+    return { variant: 'success', text: 'In Stock', icon: <FaArrowUp /> };
   };
 
   if (loading) {
@@ -230,7 +230,7 @@ export default function AnalyticsPage() {
         <div className="col-md-3">
           <div className="card text-center h-100">
             <div className="card-body">
-              <FaTrendingDown className="text-warning mb-2" size={24} />
+              <FaArrowDown className="text-warning mb-2" size={24} />
               <h3 className="mb-1">{analytics.lowStockProducts}</h3>
               <p className="text-muted mb-0">Low Stock Items</p>
             </div>
@@ -264,7 +264,7 @@ export default function AnalyticsPage() {
                     return (
                       <tr key={product.id}>
                         <td>
-                          <a href={`/products/${product.id}`} className="text-decoration-none fw-medium">
+                          <a href={`/product/${product.id}`} className="text-decoration-none fw-medium">
                             {product.name}
                           </a>
                         </td>
