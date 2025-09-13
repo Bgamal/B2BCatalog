@@ -420,7 +420,7 @@ View detailed test results and coverage analysis in [COVERAGE_REPORT.md](./COVER
 
 ---
 
-## 📈 Future Enhancements
+## 📈 Future Enhancements(Next Steps)
 
 - User authentication and authorization
 - Shopping cart and checkout functionality
