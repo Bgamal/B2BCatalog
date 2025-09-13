@@ -1,17 +1,32 @@
 export default {
     async bootstrap({ strapi }) {
-        // Set up public permissions for API access
         const role = await strapi.query('plugin::users-permissions.role').findOne({ where: { type: 'public' } });
         if (role) {
-            await strapi.service('plugin::users-permissions.role').updateRole(role.id, {
-                permissions: {
-                    'api::product.product': { controllers: { product: { find: { enabled: true }, findOne: { enabled: true } } } },
-                    'api::category.category': { controllers: { category: { find: { enabled: true }, findOne: { enabled: true } } } },
-                    'api::supplier.supplier': { controllers: { supplier: { find: { enabled: true }, findOne: { enabled: true } } } }
+            const permissionsToSet = {
+                'api::product.product': ['find', 'findOne', 'product'],
+                'api::category.category': ['find', 'findOne', 'category'],
+                'api::supplier.supplier': ['find', 'findOne', 'supplier'],
+            };
+            for (const [apiKey, actions] of Object.entries(permissionsToSet)) {
+                for (const action of actions) {
+                    const existing = await strapi.query('plugin::users-permissions.permission').findMany({
+                        where: {
+                            role: role.id,
+                            action: `${apiKey}.${action}`,
+                        },
+                    });
+                    if (existing.length === 0) {
+                        await strapi.query('plugin::users-permissions.permission').create({
+                            data: {
+                                action: `${apiKey}.${action}`,
+                                role: role.id,
+                                enabled: true,
+                            },
+                        });
+                    }
                 }
-            });
+            }
         }
-        // Bootstrap complete - no mock data created
-        console.log('Strapi bootstrap completed. Ready to create content via admin panel.');
-    }
+        console.log('Strapi bootstrap completed. Public permissions checked and updated if missing.');
+    },
 };
