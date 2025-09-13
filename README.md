@@ -31,6 +31,137 @@ B2BCatalog/
 └── COVERAGE_REPORT.md   # Test coverage analysis
 ```
 
+## 🏗️ System Architecture
+
+### Architecture Overview
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                           B2B Catalog Solution                              │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                             │
+│  ┌─────────────────┐    HTTP/REST API    ┌─────────────────┐                │
+│  │   Frontend      │ ◄─────────────────► │    Backend      │                │
+│  │   (Next.js)     │    Port 3001        │   (Strapi)      │                │
+│  │                 │                     │   Port 1337     │                │
+│  │  ┌─────────────┐│                     │ ┌─────────────┐ │                │
+│  │  │ Components  ││                     │ │ Controllers │ │                │
+│  │  │ - Products  ││                     │ │ - Products  │ │                │
+│  │  │ - Analytics ││                     │ │ - Categories│ │                │
+│  │  │ - Navigation││                     │ │ - Suppliers │ │                │
+│  │  └─────────────┘│                     │ └─────────────┘ │                │
+│  │                 │                     │                 │                │
+│  │  ┌─────────────┐│                     │ ┌─────────────┐ │                │
+│  │  │ Pages       ││                     │ │ Services    │ │                │
+│  │  │ - Homepage  ││                     │ │ - Database  │ │                │
+│  │  │ - Catalog   ││                     │ │ - Logger    │ │                │
+│  │  │ - Categories││                     │ │ - Error     │ │                │
+│  │  └─────────────┘│                     │ └─────────────┘ │                │
+│  │                 │                     │                 │                │
+│  │  ┌─────────────┐│                     │ ┌─────────────┐ │                │
+│  │  │ API Layer   ││                     │ │ Middleware  │ │                │
+│  │  │ - ApiService││                     │ │ - Error     │ │                │
+│  │  │ - Error     ││                     │ │ - Logging   │ │                │
+│  │  │   Handling  ││                     │ │ - CORS      │ │                │
+│  │  └─────────────┘│                     │ └─────────────┘ │                │
+│  └─────────────────┘                     └─────────────────┘                │
+│                                                    │                        │
+│                                                    ▼                        │
+│                                          ┌─────────────────┐                │
+│                                          │    Database     │                │
+│                                          │   (SQLite)      │                │
+│                                          │                 │                │
+│                                          │ ┌─────────────┐ │                │
+│                                          │ │   Tables    │ │                │
+│                                          │ │ - products  │ │                │
+│                                          │ │ - categories│ │                │
+│                                          │ │ - suppliers │ │                │
+│                                          │ │ - media     │ │                │
+│                                          │ └─────────────┘ │                │
+│                                          └─────────────────┘                │
+│                                                                             │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                              Testing Layer                                  │
+│                                                                             │
+│  ┌─────────────────┐                     ┌─────────────────┐                │
+│  │ Frontend Tests  │                     │ Backend Tests   │                │
+│  │ (Jest + RTL)    │                     │ (Jest + Super)  │                │
+│  │                 │                     │                 │                │
+│  │ • 15 Suites     │                     │ • 9 Suites      │                │
+│  │ • 148 Tests     │                     │ • 46 Tests      │                │
+│  │ • Components    │                     │ • API Endpoints │                │
+│  │ • Pages         │                     │ • Controllers   │                │
+│  │ • Integration   │                     │ • Services      │                │
+│  └─────────────────┘                     └─────────────────┘                │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+### Infrastructure Notes
+
+#### 🖥️ Frontend Infrastructure (Next.js)
+- **Framework**: Next.js 15.5.3 with React 19.1.1
+- **Rendering**: Client-side rendering with SSR capabilities
+- **Styling**: Bootstrap 5.3.8 + React Bootstrap 2.10.10
+- **State Management**: React hooks (useState, useEffect, useMemo)
+- **HTTP Client**: Native fetch API with custom ApiService wrapper
+- **Build Tool**: Next.js built-in webpack configuration
+- **Development Server**: Hot reload on port 3001
+- **Production**: Optimized static generation and bundling
+
+#### ⚙️ Backend Infrastructure (Strapi)
+- **Framework**: Strapi 5.11.1 (Headless CMS)
+- **Runtime**: Node.js ≥18.0.0
+- **Database**: SQLite 3 with Better-SQLite3 9.4.5
+- **API**: RESTful endpoints with automatic CRUD generation
+- **Authentication**: Strapi Users & Permissions plugin
+- **File Storage**: Local file system with media library
+- **Admin Panel**: React-based admin interface on port 1337
+- **Middleware**: Custom error handling and logging middleware
+
+#### 🗄️ Database Schema
+```sql
+-- Core Tables
+products (id, name, sku, description, price, stock, rating, featured)
+categories (id, name, slug, description)
+suppliers (id, name, email, phone, address)
+files (id, name, url, mime, size) -- Media files
+
+-- Relationships
+product_category (product_id, category_id)
+product_supplier (product_id, supplier_id)
+product_images (product_id, file_id)
+```
+
+#### 🔧 Development Tools & Infrastructure
+- **Version Control**: Git with conventional commits
+- **Package Manager**: npm with lock files
+- **Testing**: Jest 29.7.0 with coverage reporting
+- **Logging**: Custom logger with file output and console colors
+- **Error Handling**: Global error middleware with structured responses
+- **Environment**: .env configuration for API endpoints
+- **CI/CD Ready**: Automated testing and coverage reports
+
+#### 🚀 Deployment Architecture
+```
+Development Environment:
+├── Frontend: localhost:3001 (Next.js dev server)
+├── Backend: localhost:1337 (Strapi develop mode)
+├── Database: ./database/data.db (SQLite file)
+└── Logs: ./logs/*.log (Error and warning logs)
+
+Production Environment:
+├── Frontend: Static build deployment (Vercel/Netlify)
+├── Backend: Node.js server (PM2/Docker)
+├── Database: PostgreSQL/MySQL (production database)
+└── Monitoring: Log aggregation and error tracking
+```
+
+#### 📊 Performance & Monitoring
+- **Frontend Metrics**: Core Web Vitals, bundle size analysis
+- **Backend Metrics**: API response times, database query performance
+- **Error Tracking**: Structured logging with context and stack traces
+- **Testing Coverage**: 85%+ code coverage across both applications
+- **Health Checks**: API endpoint monitoring and database connectivity
+
 ---
 
 ## 🎨 Frontend Application (catalog-next)
