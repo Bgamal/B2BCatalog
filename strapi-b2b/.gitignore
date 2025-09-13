@@ -114,7 +114,7 @@ build
 
 .tmp/
 data/
-database/
+database/*
 
 ############################
 # Strapi specific
