@@ -1,5 +1,7 @@
 # B2B Catalog Solution
 
+**Repository:** [https://github.com/Bgamal/B2BCatalog](https://github.com/Bgamal/B2BCatalog)
+
 A comprehensive B2B e-commerce platform built with modern web technologies, featuring a Next.js frontend and Strapi CMS backend for efficient product catalog management and business procurement needs.
 
 ## 🚀 Solution Overview
