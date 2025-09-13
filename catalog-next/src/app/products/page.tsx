@@ -180,6 +180,8 @@ export default function ProductsPage() {
   const [isClient, setIsClient] = useState(false);
   const [apiUrl, setApiUrl] = useState('');
   const [priceRange, setPriceRange] = useState<[number, number]>([0, 1000]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [productsPerPage] = useState(9); // Number of products per page
 
   // Set client-side flag and log API URL on mount
   useEffect(() => {
@@ -316,6 +318,67 @@ export default function ProductsPage() {
         }
       });
   }, [products, q, categoryId, supplierId, sortBy, priceRange]);
+
+  // Pagination calculations
+  const totalProducts = filteredProducts.length;
+  const totalPages = Math.ceil(totalProducts / productsPerPage);
+  const startIndex = (currentPage - 1) * productsPerPage;
+  const endIndex = startIndex + productsPerPage;
+  const currentProducts = filteredProducts.slice(startIndex, endIndex);
+
+  // Reset to first page when filters change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [q, categoryId, supplierId, sortBy, priceRange]);
+
+  // Pagination handlers
+  const goToPage = (page: number) => {
+    setCurrentPage(page);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const goToPrevPage = () => {
+    if (currentPage > 1) {
+      goToPage(currentPage - 1);
+    }
+  };
+
+  const goToNextPage = () => {
+    if (currentPage < totalPages) {
+      goToPage(currentPage + 1);
+    }
+  };
+
+  // Generate page numbers for pagination
+  const getPageNumbers = () => {
+    const pages = [];
+    const maxVisiblePages = 5;
+    
+    if (totalPages <= maxVisiblePages) {
+      for (let i = 1; i <= totalPages; i++) {
+        pages.push(i);
+      }
+    } else {
+      const startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
+      const endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+      
+      if (startPage > 1) {
+        pages.push(1);
+        if (startPage > 2) pages.push('...');
+      }
+      
+      for (let i = startPage; i <= endPage; i++) {
+        pages.push(i);
+      }
+      
+      if (endPage < totalPages) {
+        if (endPage < totalPages - 1) pages.push('...');
+        pages.push(totalPages);
+      }
+    }
+    
+    return pages;
+  };
 
   // Format price
   const formatPrice = (price: number) => {
@@ -497,7 +560,7 @@ export default function ProductsPage() {
             <div className="d-flex justify-content-between align-items-center mb-4">
               <div>
                 <span className="text-muted">
-                  Showing <strong>{filteredProducts.length}</strong> {filteredProducts.length === 1 ? 'product' : 'products'}
+                  Showing <strong>{startIndex + 1}-{Math.min(endIndex, totalProducts)}</strong> of <strong>{totalProducts}</strong> {totalProducts === 1 ? 'product' : 'products'}
                 </span>
               </div>
               <div className="d-flex align-items-center">
@@ -517,9 +580,9 @@ export default function ProductsPage() {
             </div>
 
             {/* Products Grid */}
-            {filteredProducts.length > 0 ? (
+            {currentProducts.length > 0 ? (
               <Row xs={1} md={2} lg={3} className="g-4">
-                {filteredProducts.map((product: Product) => (
+                {currentProducts.map((product: Product) => (
                   <Col key={product.id}>
                     <Card 
                       className="h-100 product-card cursor-pointer" 
@@ -614,6 +677,69 @@ export default function ProductsPage() {
                   </Button>
                 </Card.Body>
               </Card>
+            )}
+
+            {/* Pagination */}
+            {totalPages > 1 && (
+              <div className="d-flex justify-content-center align-items-center mt-5">
+                <nav aria-label="Products pagination">
+                  <div className="d-flex align-items-center gap-2">
+                    {/* Previous Button */}
+                    <Button
+                      variant="outline-primary"
+                      size="sm"
+                      onClick={goToPrevPage}
+                      disabled={currentPage === 1}
+                      className="d-flex align-items-center gap-1"
+                    >
+                      <FaChevronLeft size={12} />
+                      Previous
+                    </Button>
+
+                    {/* Page Numbers */}
+                    <div className="d-flex gap-1 mx-2">
+                      {getPageNumbers().map((page, index) => (
+                        <div key={index}>
+                          {page === '...' ? (
+                            <span className="px-2 py-1 text-muted">...</span>
+                          ) : (
+                            <Button
+                              variant={currentPage === page ? "primary" : "outline-primary"}
+                              size="sm"
+                              onClick={() => goToPage(page as number)}
+                              className="px-3 py-1"
+                              style={{ minWidth: '40px' }}
+                            >
+                              {page}
+                            </Button>
+                          )}
+                        </div>
+                      ))}
+                    </div>
+
+                    {/* Next Button */}
+                    <Button
+                      variant="outline-primary"
+                      size="sm"
+                      onClick={goToNextPage}
+                      disabled={currentPage === totalPages}
+                      className="d-flex align-items-center gap-1"
+                    >
+                      Next
+                      <FaChevronRight size={12} />
+                    </Button>
+                  </div>
+                </nav>
+              </div>
+            )}
+
+            {/* Pagination Info */}
+            {totalPages > 1 && (
+              <div className="text-center mt-3">
+                <small className="text-muted">
+                  Page {currentPage} of {totalPages} ({totalProducts} total products)
+                </small>
+              </div>
             )}
           </Col>
         </Row>
