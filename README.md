@@ -527,6 +527,53 @@ NEXT_PUBLIC_API_BASE=http://localhost:1337
 - **Backend**: http://localhost:1337
 - **Admin Panel**: http://localhost:1337/admin
 
+### User Roles & Authentication
+
+The B2B Catalog system includes a role-based access control system with three distinct user roles:
+
+#### 🔐 User Roles
+
+**1. Supplier Role**
+- Access to supplier-specific product management
+- Can view and update their own products and inventory
+- Limited access to analytics for their products only
+- Cannot access other suppliers' data
+
+**2. Admin Role**
+- Full access to product catalog management
+- Can manage all products, categories, and suppliers
+- Access to comprehensive analytics and reporting
+- User management capabilities for suppliers
+
+**3. Super Admin Role**
+- Complete system administration access
+- Full database management capabilities
+- User role management and system configuration
+- Access to all system logs and error reports
+- Can manage admin users and system settings
+
+#### 👥 Default User Accounts
+
+**Supplier User:**
+- **Username**: `supplier`
+- **Email**: `supplier@b2bcatalog.com`
+- **Password**: `Dev@1234567`
+- **Role**: Supplier
+
+**Admin User:**
+- **Username**: `admin`
+- **Email**: `admin@b2bcatalog.com`
+- **Password**: `Dev@1234567`
+- **Role**: Admin
+
+**Super Admin User:**
+- **Username**: `superadmin`
+- **Email**: `superadmin@b2bcatalog.com`
+- **Password**: `Dev@1234567`
+- **Role**: Super Admin
+
+> **Security Note**: Please change these default passwords immediately after first login in a production environment.
+
 ### Testing Setup
 After setting up the main applications, you can run the comprehensive test suites:
 
