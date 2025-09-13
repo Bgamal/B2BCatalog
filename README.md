@@ -26,6 +26,7 @@ B2BCatalog/
 ├── strapi-b2b/           # Strapi CMS Backend
 ├── catalog-next-tests/   # Frontend Test Suite
 ├── strapi-b2b-tests/    # Backend Test Suite
+├── sample-data/          # Sample Data for B2B Catalog
 ├── README.md            # Project documentation
 ├── LICENSE              # MIT License
 └── COVERAGE_REPORT.md   # Test coverage analysis
@@ -344,6 +345,7 @@ Production Environment:
 - **Development Mode**: `npm run develop` with hot reload
 - **Production Mode**: `npm run start` for production deployment
 - **Build Process**: `npm run build` for optimized builds
+- **Sample Data Import**: Automatic bootstrap process that imports sample categories, suppliers, and products on startup
 
 ### 📊 Logging & Error Handling
 
@@ -499,6 +501,11 @@ npm run test:models       # Model tests only
    npm run develop
    ```
    The Strapi admin panel will be available at `http://localhost:1337/admin`
+   
+   **Sample Data Import**: The backend automatically imports sample data on startup, including:
+   - 10 product categories (Electronics, Office Supplies, Industrial Equipment, etc.)
+   - 10 suppliers with contact information
+   - 15 sample products with complete details (name, SKU, price, stock, ratings)
 
 3. **Setup Frontend (Next.js)**
    ```bash
@@ -542,12 +549,107 @@ View detailed test results and coverage analysis in [COVERAGE_REPORT.md](./COVER
 ## 🔧 Development Workflow
 
 1. **Start Backend**: Run Strapi development server
-2. **Configure Content Types**: Set up Products, Categories, and Suppliers in Strapi admin
-3. **Add Sample Data**: Populate the database with test products and categories
-4. **Start Frontend**: Launch Next.js development server
-5. **Run Tests**: Execute test suites to ensure code quality
-6. **Test Integration**: Verify API communication between frontend and backend
-7. **Check Coverage**: Review test coverage reports for quality assurance
+2. **Automatic Data Import**: Sample data is automatically imported on first startup
+3. **Start Frontend**: Launch Next.js development server
+4. **Run Tests**: Execute test suites to ensure code quality
+5. **Test Integration**: Verify API communication between frontend and backend
+6. **Check Coverage**: Review test coverage reports for quality assurance
+
+---
+
+## 📦 Sample Data Project
+
+The B2B Catalog includes a comprehensive sample data project located in the `sample-data/` directory that provides realistic business data for testing and demonstration purposes.
+
+### Sample Data Structure
+
+```
+sample-data/
+├── categories.json       # 10 product categories with descriptions
+├── suppliers.json        # 10 suppliers with contact information
+├── products.json         # 15 sample products with complete details
+├── import-data.js        # Data import utility script
+└── README.md            # Sample data documentation
+```
+
+### Sample Data Contents
+
+#### Categories (10 items)
+- **Electronics**: Computers, networking equipment, and electronic devices
+- **Office Supplies**: Furniture, stationery, and office equipment
+- **Industrial Equipment**: Heavy machinery and industrial tools
+- **Safety Equipment**: Personal protective equipment and safety gear
+- **Cleaning Supplies**: Industrial and commercial cleaning products
+- **Medical Equipment**: Healthcare devices and medical supplies
+- **Automotive Parts**: Vehicle components and automotive supplies
+- **Construction Materials**: Building supplies and construction equipment
+- **Food Service Equipment**: Commercial kitchen and restaurant equipment
+- **IT Hardware**: Servers, networking, and IT infrastructure
+
+#### Suppliers (10 items)
+Each supplier includes:
+- Company name and contact person
+- Email address and phone number
+- Complete business address
+- Specialization area
+
+#### Products (15 items)
+Each product includes:
+- **Basic Information**: Name, SKU, description
+- **Pricing**: Sale price and cost price
+- **Inventory**: Stock quantity and minimum stock levels
+- **Physical Details**: Weight and dimensions
+- **Business Data**: Category and supplier relationships
+- **Status Flags**: Active status and featured product indicators
+- **Quality Metrics**: Customer ratings and review data
+
+### Automatic Import Process
+
+The sample data is automatically imported when Strapi starts up through the bootstrap process:
+
+1. **Categories Import**: Creates all product categories first
+2. **Suppliers Import**: Adds supplier information and contact details
+3. **Products Import**: Imports products with proper category and supplier relationships
+4. **Field Mapping**: Automatically maps data fields to match Strapi schema requirements
+5. **Validation**: Ensures data integrity and proper relationships
+
+### Import Features
+
+- **Smart Field Mapping**: Automatically converts `stockQuantity` to `stock` for Strapi compatibility
+- **Relationship Resolution**: Maps category and supplier names to database IDs
+- **Error Handling**: Graceful handling of missing or invalid data
+- **Progress Logging**: Real-time import status with emoji indicators
+- **Duplicate Prevention**: Checks for existing data to prevent duplicates
+
+### Sample Data Benefits
+
+- **Instant Testing**: Ready-to-use data for immediate application testing
+- **Realistic Scenarios**: Business-appropriate product catalog for B2B demonstrations
+- **Complete Relationships**: Fully linked categories, suppliers, and products
+- **Diverse Product Range**: Wide variety of business products across multiple industries
+- **Professional Data**: Realistic pricing, stock levels, and business information
+
+### Using Sample Data
+
+The sample data is automatically imported on first Strapi startup. You'll see progress messages like:
+
+```
+🚀 Starting Strapi B2B application bootstrap
+📦 Starting sample data import
+Importing sample categories...
+✅ Created category: Electronics
+✅ Created category: Office Supplies
+...
+Importing sample suppliers...
+✅ Created supplier: TechCorp Solutions
+...
+Importing sample products...
+✅ Created product: Professional Laptop Computer
+...
+🎉 Sample data import completed! { categories: 10, suppliers: 10, products: 15 }
+```
+
+This provides a fully populated B2B catalog ready for testing and demonstration purposes.
 
 ---
 
