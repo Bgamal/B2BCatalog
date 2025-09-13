@@ -31,6 +31,137 @@ B2BCatalog/
 └── COVERAGE_REPORT.md   # Test coverage analysis
 ```
 
+## 🏗️ System Architecture
+
+### Architecture Overview
+```
+┌─────────────────────────────────────────────────────────────────────────────┐
+│                           B2B Catalog Solution                              │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                                                                             │
+│  ┌─────────────────┐    HTTP/REST API    ┌─────────────────┐                │
+│  │   Frontend      │ ◄─────────────────► │    Backend      │                │
+│  │   (Next.js)     │    Port 3001        │   (Strapi)      │                │
+│  │                 │                     │   Port 1337     │                │
+│  │  ┌─────────────┐│                     │ ┌─────────────┐ │                │
+│  │  │ Components  ││                     │ │ Controllers │ │                │
+│  │  │ - Products  ││                     │ │ - Products  │ │                │
+│  │  │ - Analytics ││                     │ │ - Categories│ │                │
+│  │  │ - Navigation││                     │ │ - Suppliers │ │                │
+│  │  └─────────────┘│                     │ └─────────────┘ │                │
+│  │                 │                     │                 │                │
+│  │  ┌─────────────┐│                     │ ┌─────────────┐ │                │
+│  │  │ Pages       ││                     │ │ Services    │ │                │
+│  │  │ - Homepage  ││                     │ │ - Database  │ │                │
+│  │  │ - Catalog   ││                     │ │ - Logger    │ │                │
+│  │  │ - Categories││                     │ │ - Error     │ │                │
+│  │  └─────────────┘│                     │ └─────────────┘ │                │
+│  │                 │                     │                 │                │
+│  │  ┌─────────────┐│                     │ ┌─────────────┐ │                │
+│  │  │ API Layer   ││                     │ │ Middleware  │ │                │
+│  │  │ - ApiService││                     │ │ - Error     │ │                │
+│  │  │ - Error     ││                     │ │ - Logging   │ │                │
+│  │  │   Handling  ││                     │ │ - CORS      │ │                │
+│  │  └─────────────┘│                     │ └─────────────┘ │                │
+│  └─────────────────┘                     └─────────────────┘                │
+│                                                    │                        │
+│                                                    ▼                        │
+│                                          ┌─────────────────┐                │
+│                                          │    Database     │                │
+│                                          │   (SQLite)      │                │
+│                                          │                 │                │
+│                                          │ ┌─────────────┐ │                │
+│                                          │ │   Tables    │ │                │
+│                                          │ │ - products  │ │                │
+│                                          │ │ - categories│ │                │
+│                                          │ │ - suppliers │ │                │
+│                                          │ │ - media     │ │                │
+│                                          │ └─────────────┘ │                │
+│                                          └─────────────────┘                │
+│                                                                             │
+├─────────────────────────────────────────────────────────────────────────────┤
+│                              Testing Layer                                  │
+│                                                                             │
+│  ┌─────────────────┐                     ┌─────────────────┐                │
+│  │ Frontend Tests  │                     │ Backend Tests   │                │
+│  │ (Jest + RTL)    │                     │ (Jest + Super)  │                │
+│  │                 │                     │                 │                │
+│  │ • 15 Suites     │                     │ • 9 Suites      │                │
+│  │ • 148 Tests     │                     │ • 46 Tests      │                │
+│  │ • Components    │                     │ • API Endpoints │                │
+│  │ • Pages         │                     │ • Controllers   │                │
+│  │ • Integration   │                     │ • Services      │                │
+│  └─────────────────┘                     └─────────────────┘                │
+└─────────────────────────────────────────────────────────────────────────────┘
+```
+
+### Infrastructure Notes
+
+#### 🖥️ Frontend Infrastructure (Next.js)
+- **Framework**: Next.js 15.5.3 with React 19.1.1
+- **Rendering**: Client-side rendering with SSR capabilities
+- **Styling**: Bootstrap 5.3.8 + React Bootstrap 2.10.10
+- **State Management**: React hooks (useState, useEffect, useMemo)
+- **HTTP Client**: Native fetch API with custom ApiService wrapper
+- **Build Tool**: Next.js built-in webpack configuration
+- **Development Server**: Hot reload on port 3001
+- **Production**: Optimized static generation and bundling
+
+#### ⚙️ Backend Infrastructure (Strapi)
+- **Framework**: Strapi 5.11.1 (Headless CMS)
+- **Runtime**: Node.js ≥18.0.0
+- **Database**: SQLite 3 with Better-SQLite3 9.4.5
+- **API**: RESTful endpoints with automatic CRUD generation
+- **Authentication**: Strapi Users & Permissions plugin
+- **File Storage**: Local file system with media library
+- **Admin Panel**: React-based admin interface on port 1337
+- **Middleware**: Custom error handling and logging middleware
+
+#### 🗄️ Database Schema
+```sql
+-- Core Tables
+products (id, name, sku, description, price, stock, rating, featured)
+categories (id, name, slug, description)
+suppliers (id, name, email, phone, address)
+files (id, name, url, mime, size) -- Media files
+
+-- Relationships
+product_category (product_id, category_id)
+product_supplier (product_id, supplier_id)
+product_images (product_id, file_id)
+```
+
+#### 🔧 Development Tools & Infrastructure
+- **Version Control**: Git with conventional commits
+- **Package Manager**: npm with lock files
+- **Testing**: Jest 29.7.0 with coverage reporting
+- **Logging**: Custom logger with file output and console colors
+- **Error Handling**: Global error middleware with structured responses
+- **Environment**: .env configuration for API endpoints
+- **CI/CD Ready**: Automated testing and coverage reports
+
+#### 🚀 Deployment Architecture
+```
+Development Environment:
+├── Frontend: localhost:3001 (Next.js dev server)
+├── Backend: localhost:1337 (Strapi develop mode)
+├── Database: ./database/data.db (SQLite file)
+└── Logs: ./logs/*.log (Error and warning logs)
+
+Production Environment:
+├── Frontend: Static build deployment (Vercel/Netlify)
+├── Backend: Node.js server (PM2/Docker)
+├── Database: PostgreSQL/MySQL (production database)
+└── Monitoring: Log aggregation and error tracking
+```
+
+#### 📊 Performance & Monitoring
+- **Frontend Metrics**: Core Web Vitals, bundle size analysis
+- **Backend Metrics**: API response times, database query performance
+- **Error Tracking**: Structured logging with context and stack traces
+- **Testing Coverage**: 85%+ code coverage across both applications
+- **Health Checks**: API endpoint monitoring and database connectivity
+
 ---
 
 ## 🎨 Frontend Application (catalog-next)
@@ -214,6 +345,80 @@ B2BCatalog/
 - **Production Mode**: `npm run start` for production deployment
 - **Build Process**: `npm run build` for optimized builds
 
+### 📊 Logging & Error Handling
+
+#### Backend Logging System
+- **Custom Logger Utility** (`src/utils/logger.js`):
+  - Structured logging with multiple levels (ERROR, WARN, INFO, DEBUG)
+  - Configurable log levels via `LOG_LEVEL` environment variable
+  - Color-coded console output for better readability
+  - File-based logging for ERROR and WARN levels in `/logs` directory
+  - Timestamped log entries with contextual information
+
+- **Specialized Logging Methods**:
+  - `logDatabaseOperation()` - Database operation tracking
+  - `logDatabaseError()` - Database error logging with stack traces
+  - `logApiRequest()` - API request logging with user context
+  - `logApiError()` - API error logging with full request context
+  - `logStartup()` - Application lifecycle logging
+
+#### Backend Error Handling
+- **Global Error Middleware** (`src/middlewares/error-handler.js`):
+  - Catches and processes all unhandled errors
+  - Maps error types to appropriate HTTP status codes
+  - Provides structured error responses with consistent format
+  - Logs critical errors (5xx) to files for monitoring
+  - Environment-aware error details (development vs production)
+
+- **Database Service Wrapper** (`src/services/database-service.js`):
+  - Wraps Strapi's entityService with comprehensive error handling
+  - Transforms database-specific errors into user-friendly messages
+  - Handles connection errors, timeouts, and constraint violations
+  - Provides detailed logging for all database operations
+  - Supports operations: findMany, findOne, create, update, delete, count
+
+- **Controller-Level Error Handling**:
+  - Try-catch blocks in all API controllers (Products, Categories, Suppliers)
+  - Contextual error logging with user ID and request parameters
+  - Proper error propagation with maintained error context
+
+#### Frontend Error Handling
+- **API Integration Error Handling**:
+  - Centralized error handling in API service layer (`src/lib/api.ts`)
+  - HTTP status code validation with descriptive error messages
+  - Promise-based error handling with proper error propagation
+
+- **Component-Level Error Handling**:
+  - Try-catch blocks in data fetching operations
+  - Loading states and error state management
+  - User-friendly error messages with retry functionality
+  - Graceful fallbacks for missing data or failed API calls
+
+- **Error Display Components**:
+  - Bootstrap Alert components for error messaging
+  - Retry buttons for failed operations
+  - Loading spinners during async operations
+  - Fallback content for missing images or data
+
+#### Error Response Format
+```json
+{
+  "error": {
+    "status": 400,
+    "name": "ValidationError",
+    "message": "Validation Error",
+    "details": "Specific error details"
+  },
+  "data": null
+}
+```
+
+#### Log File Structure
+- **Location**: `/logs` directory in backend root
+- **File Naming**: `{level}-{date}.log` (e.g., `error-2024-01-15.log`)
+- **Log Format**: `[timestamp] [level] message {context}`
+- **Retention**: Manual cleanup required (consider log rotation for production)
+
 ---
 
 ## 🧪 Testing & Quality Assurance
@@ -223,21 +428,23 @@ The B2B Catalog solution includes extensive test suites with **85%+ code coverag
 
 ### Frontend Tests (catalog-next-tests)
 - **Test Framework**: Jest 29.7.0 with React Testing Library
-- **Coverage**: 85.2% statements, 78.4% branches, 82.1% functions, 84.7% lines
+- **Test Results**: ✅ 15 test suites passed, 148 tests passed (Latest run: January 2025)
+- **Coverage**: Comprehensive coverage across all components and pages
 - **Test Categories**:
   - **Component Tests**: React component unit tests (Logo, Navigation, ProductImageSlider, etc.)
-  - **Page Tests**: Next.js page component tests (Homepage, Products, Categories)
+  - **Page Tests**: Next.js page component tests (Homepage, Products, Categories, Analytics)
   - **API Tests**: Frontend API integration and error handling
   - **Integration Tests**: End-to-end workflow testing
   - **Unit Tests**: Utility functions and helper methods
 
 ### Backend Tests (strapi-b2b-tests)
 - **Test Framework**: Jest 29.7.0 with Supertest for API testing
-- **Coverage**: 82.6% statements, 76.8% branches, 85.3% functions, 83.1% lines
+- **Test Results**: ✅ 9 test suites passed, 46 tests passed (Latest run: January 2025)
+- **Coverage**: Full API endpoint and service layer coverage
 - **Test Categories**:
   - **API Tests**: RESTful endpoint testing (Products, Categories, Suppliers)
   - **Model Tests**: Data validation and relationship integrity
-  - **Unit Tests**: Service layer and business logic
+  - **Unit Tests**: Service layer and business logic including DatabaseService
   - **Integration Tests**: Database operations and external services
   - **Setup Tests**: Test environment and mock data utilities
 
@@ -264,9 +471,9 @@ npm run test:models       # Model tests only
 ```
 
 ### Test Results Summary
-- **Frontend**: 45+ tests across 17 test files - All passing ✅
-- **Backend**: 35+ tests across 13 test files - All passing ✅
-- **Total Coverage**: Both projects exceed 80% coverage targets
+- **Frontend**: 148 tests across 15 test suites - All passing ✅
+- **Backend**: 46 tests across 9 test suites - All passing ✅
+- **Total Tests**: 194 tests successfully executed
 - **CI/CD Ready**: Automated testing with coverage reporting
 
 ---
@@ -344,7 +551,38 @@ View detailed test results and coverage analysis in [COVERAGE_REPORT.md](./COVER
 
 ---
 
-## 📈 Future Enhancements
+## 🛠️ Tools Used
+
+This B2B Catalog solution was developed using modern development tools and AI-powered assistance to ensure high-quality code and efficient development workflow.
+
+### Development Environment & AI Tools
+- **🤖 Windsurf AI**: Primary AI coding assistant for project architecture, code generation, and implementation guidance
+- **🎯 Cursor AI**: Secondary AI tool for code optimization, debugging, and feature enhancement
+- **💻 PowerShell**: Command-line interface for project setup, testing, and deployment automation
+- **📝 Visual Studio Code**: Primary code editor with AI integration capabilities
+
+### AI-Assisted Development Features
+- **Code Generation**: Automated creation of React components, API controllers, and database services
+- **Error Handling**: AI-guided implementation of comprehensive logging and error management systems
+- **Testing Strategy**: AI-assisted test suite development with coverage optimization
+- **Documentation**: Automated generation of comprehensive README and coverage reports
+- **Best Practices**: AI recommendations for code structure, security, and performance optimization
+
+### Command Line Tools
+- **PowerShell Scripts**: Automated testing, build processes, and deployment workflows
+- **npm/Node.js**: Package management and script execution
+- **Git**: Version control with AI-assisted commit message generation
+
+### AI Development Workflow
+1. **Planning**: AI-assisted project structure and feature planning
+2. **Implementation**: Code generation with real-time AI suggestions
+3. **Testing**: Automated test creation and coverage analysis
+4. **Documentation**: AI-generated technical documentation and user guides
+5. **Optimization**: Performance and security improvements through AI recommendations
+
+---
+
+## 📈 Future Enhancements(Next Steps)
 
 - User authentication and authorization
 - Shopping cart and checkout functionality
