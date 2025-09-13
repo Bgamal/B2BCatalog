@@ -1,0 +1,167 @@
+[
+  {
+    "name": "Wireless Ergonomic Mouse",
+    "sku": "WEM-001",
+    "description": "Professional wireless mouse with ergonomic design for extended use in office environments.",
+    "price": 45.99,
+    "stock": 150,
+    "rating": 4.5,
+    "featured": true,
+    "category": "IT & Technology",
+    "supplier": "TechFlow Solutions"
+  },
+  {
+    "name": "Industrial Safety Helmet",
+    "sku": "ISH-002",
+    "description": "OSHA-compliant hard hat with adjustable suspension system for construction and industrial work.",
+    "price": 28.50,
+    "stock": 200,
+    "rating": 4.8,
+    "featured": false,
+    "category": "Safety & Security",
+    "supplier": "SafeGuard Equipment"
+  },
+  {
+    "name": "Commercial Coffee Machine",
+    "sku": "CCM-003",
+    "description": "High-capacity espresso machine designed for restaurants and office break rooms.",
+    "price": 1299.99,
+    "stock": 25,
+    "rating": 4.3,
+    "featured": true,
+    "category": "Food Service Equipment",
+    "supplier": "FoodService Direct"
+  },
+  {
+    "name": "Office Paper Shredder",
+    "sku": "OPS-004",
+    "description": "Cross-cut paper shredder with 12-sheet capacity for secure document disposal.",
+    "price": 189.99,
+    "stock": 75,
+    "rating": 4.2,
+    "featured": false,
+    "category": "Office Supplies",
+    "supplier": "Office Essentials Inc."
+  },
+  {
+    "name": "Digital Blood Pressure Monitor",
+    "sku": "DBP-005",
+    "description": "Professional-grade automatic blood pressure monitor for medical facilities.",
+    "price": 245.00,
+    "stock": 60,
+    "rating": 4.7,
+    "featured": true,
+    "category": "Medical & Healthcare",
+    "supplier": "MedEquip Healthcare"
+  },
+  {
+    "name": "Heavy-Duty Floor Cleaner",
+    "sku": "HDC-006",
+    "description": "Industrial-strength floor cleaning solution for commercial and institutional use.",
+    "price": 32.99,
+    "stock": 300,
+    "rating": 4.1,
+    "featured": false,
+    "category": "Cleaning & Janitorial",
+    "supplier": "CleanPro Commercial"
+  },
+  {
+    "name": "Brake Pad Set - Universal",
+    "sku": "BPS-007",
+    "description": "High-performance ceramic brake pads suitable for various vehicle models.",
+    "price": 89.99,
+    "stock": 120,
+    "rating": 4.6,
+    "featured": false,
+    "category": "Automotive Parts",
+    "supplier": "AutoParts Warehouse"
+  },
+  {
+    "name": "Steel Reinforcement Bars",
+    "sku": "SRB-008",
+    "description": "Grade 60 steel rebar for concrete reinforcement in construction projects.",
+    "price": 125.00,
+    "stock": 500,
+    "rating": 4.4,
+    "featured": false,
+    "category": "Construction Materials",
+    "supplier": "BuildRight Materials"
+  },
+  {
+    "name": "LED Panel Light 2x4",
+    "sku": "LED-009",
+    "description": "Energy-efficient LED panel light for office and commercial ceiling installations.",
+    "price": 67.50,
+    "stock": 180,
+    "rating": 4.5,
+    "featured": true,
+    "category": "Electrical Components",
+    "supplier": "ElectroTech Components"
+  },
+  {
+    "name": "Corrugated Shipping Boxes",
+    "sku": "CSB-010",
+    "description": "Pack of 50 medium-sized corrugated boxes for e-commerce shipping and storage.",
+    "price": 24.99,
+    "stock": 400,
+    "rating": 4.0,
+    "featured": false,
+    "category": "Packaging & Shipping",
+    "supplier": "PackageMax Solutions"
+  },
+  {
+    "name": "Laboratory Microscope",
+    "sku": "LAB-011",
+    "description": "Professional compound microscope with 1000x magnification for research applications.",
+    "price": 899.99,
+    "stock": 15,
+    "rating": 4.9,
+    "featured": true,
+    "category": "Laboratory Equipment",
+    "supplier": "LabTech Scientific"
+  },
+  {
+    "name": "Executive Office Chair",
+    "sku": "EOC-012",
+    "description": "Leather executive chair with lumbar support and adjustable height mechanism.",
+    "price": 349.99,
+    "stock": 85,
+    "rating": 4.3,
+    "featured": false,
+    "category": "Furniture & Fixtures",
+    "supplier": "ComfortSpace Furniture"
+  },
+  {
+    "name": "Commercial Air Conditioner",
+    "sku": "CAC-013",
+    "description": "5-ton commercial HVAC unit suitable for medium-sized office spaces.",
+    "price": 2499.99,
+    "stock": 12,
+    "rating": 4.6,
+    "featured": true,
+    "category": "HVAC & Climate Control",
+    "supplier": "Climate Control Systems"
+  },
+  {
+    "name": "Work Uniform Shirts",
+    "sku": "WUS-014",
+    "description": "Pack of 5 professional work shirts with company logo embroidery options.",
+    "price": 79.99,
+    "stock": 250,
+    "rating": 4.2,
+    "featured": false,
+    "category": "Textiles & Apparel",
+    "supplier": "Textile Pro Industries"
+  },
+  {
+    "name": "Hydraulic Floor Jack",
+    "sku": "HFJ-015",
+    "description": "3-ton hydraulic floor jack for automotive service and maintenance operations.",
+    "price": 156.99,
+    "stock": 45,
+    "rating": 4.7,
+    "featured": false,
+    "category": "Industrial Equipment",
+    "supplier": "Industrial Supply Co."
+  }
+]

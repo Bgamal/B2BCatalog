@@ -26,6 +26,7 @@ B2BCatalog/
 ├── strapi-b2b/           # Strapi CMS Backend
 ├── catalog-next-tests/   # Frontend Test Suite
 ├── strapi-b2b-tests/    # Backend Test Suite
+├── sample-data/          # Sample data and import scripts
 ├── README.md            # Project documentation
 ├── LICENSE              # MIT License
 └── COVERAGE_REPORT.md   # Test coverage analysis
@@ -268,6 +269,40 @@ npm run test:models       # Model tests only
 - **Backend**: 35+ tests across 13 test files - All passing ✅
 - **Total Coverage**: Both projects exceed 80% coverage targets
 - **CI/CD Ready**: Automated testing with coverage reporting
+
+---
+
+## 📊 Sample Data & Import
+
+### Comprehensive Test Data
+The B2B Catalog includes a complete sample dataset with realistic business data to help you get started quickly. See [sample-data/README.md](./sample-data/README.md) for detailed documentation.
+
+### Sample Data Contents
+- **15 B2B Categories**: Office Supplies, Industrial Equipment, IT & Technology, Safety & Security, Medical & Healthcare, and more
+- **20 Business Suppliers**: Complete with contact information across major US cities
+- **15 Sample Products**: Realistic B2B pricing from $24.99 to $2,499.99 with proper category and supplier relationships
+
+### Quick Import (Recommended)
+```bash
+# Windows PowerShell
+cd sample-data
+Copy-Item seed-strapi.js ..\strapi-b2b\config\functions\bootstrap.js
+cd ..\strapi-b2b
+npm run develop
+```
+
+```bash
+# Linux/Mac
+cd sample-data
+cp seed-strapi.js ../strapi-b2b/config/functions/bootstrap.js
+cd ../strapi-b2b
+npm run develop
+```
+
+### Alternative Import Methods
+- **API Import Script**: `node sample-data/import-api-calls.js`
+- **Manual Import**: Via Strapi Admin Panel at http://localhost:1337/admin
+- **Custom Seeding**: Modify JSON files in `sample-data/` directory
 
 ---
 

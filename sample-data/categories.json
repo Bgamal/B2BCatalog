@@ -1,0 +1,77 @@
+[
+  {
+    "name": "Office Supplies",
+    "slug": "office-supplies",
+    "description": "Essential office equipment and supplies for daily business operations including stationery, filing systems, and desk accessories."
+  },
+  {
+    "name": "Industrial Equipment",
+    "slug": "industrial-equipment", 
+    "description": "Heavy-duty machinery and equipment for manufacturing, construction, and industrial applications."
+  },
+  {
+    "name": "IT & Technology",
+    "slug": "it-technology",
+    "description": "Computer hardware, software, networking equipment, and technology solutions for modern businesses."
+  },
+  {
+    "name": "Safety & Security",
+    "slug": "safety-security",
+    "description": "Personal protective equipment, safety gear, security systems, and workplace safety solutions."
+  },
+  {
+    "name": "Cleaning & Janitorial",
+    "slug": "cleaning-janitorial",
+    "description": "Commercial cleaning supplies, janitorial equipment, and maintenance products for facilities management."
+  },
+  {
+    "name": "Food Service Equipment",
+    "slug": "food-service-equipment",
+    "description": "Commercial kitchen equipment, food preparation tools, and restaurant supplies for hospitality businesses."
+  },
+  {
+    "name": "Medical & Healthcare",
+    "slug": "medical-healthcare",
+    "description": "Medical devices, healthcare equipment, pharmaceuticals, and supplies for healthcare facilities."
+  },
+  {
+    "name": "Automotive Parts",
+    "slug": "automotive-parts",
+    "description": "Vehicle parts, automotive tools, maintenance equipment, and accessories for automotive businesses."
+  },
+  {
+    "name": "Construction Materials",
+    "slug": "construction-materials",
+    "description": "Building materials, construction tools, hardware, and supplies for construction and renovation projects."
+  },
+  {
+    "name": "Electrical Components",
+    "slug": "electrical-components",
+    "description": "Electrical parts, wiring, lighting fixtures, and electrical installation equipment for commercial use."
+  },
+  {
+    "name": "Packaging & Shipping",
+    "slug": "packaging-shipping",
+    "description": "Packaging materials, shipping supplies, boxes, labels, and logistics equipment for e-commerce and shipping."
+  },
+  {
+    "name": "Laboratory Equipment",
+    "slug": "laboratory-equipment",
+    "description": "Scientific instruments, lab supplies, testing equipment, and research tools for laboratories and R&D facilities."
+  },
+  {
+    "name": "Furniture & Fixtures",
+    "slug": "furniture-fixtures",
+    "description": "Commercial furniture, office seating, desks, storage solutions, and interior fixtures for business spaces."
+  },
+  {
+    "name": "HVAC & Climate Control",
+    "slug": "hvac-climate-control",
+    "description": "Heating, ventilation, air conditioning systems, and climate control equipment for commercial buildings."
+  },
+  {
+    "name": "Textiles & Apparel",
+    "slug": "textiles-apparel",
+    "description": "Commercial textiles, uniforms, workwear, and fabric materials for various business applications."
+  }
+]

@@ -1,0 +1,122 @@
+[
+  {
+    "name": "TechFlow Solutions",
+    "email": "orders@techflowsolutions.com",
+    "phone": "+1-555-0123",
+    "address": "1250 Technology Drive, Silicon Valley, CA 94025"
+  },
+  {
+    "name": "Industrial Supply Co.",
+    "email": "sales@industrialsupply.com",
+    "phone": "+1-555-0234",
+    "address": "4500 Manufacturing Blvd, Detroit, MI 48201"
+  },
+  {
+    "name": "MedEquip Healthcare",
+    "email": "procurement@medequip.com",
+    "phone": "+1-555-0345",
+    "address": "890 Medical Center Way, Houston, TX 77030"
+  },
+  {
+    "name": "Office Essentials Inc.",
+    "email": "wholesale@officeessentials.com",
+    "phone": "+1-555-0456",
+    "address": "2100 Business Park Drive, Atlanta, GA 30309"
+  },
+  {
+    "name": "SafeGuard Equipment",
+    "email": "info@safeguardequip.com",
+    "phone": "+1-555-0567",
+    "address": "3300 Safety Boulevard, Phoenix, AZ 85001"
+  },
+  {
+    "name": "CleanPro Commercial",
+    "email": "orders@cleanprocommercial.com",
+    "phone": "+1-555-0678",
+    "address": "1800 Maintenance Avenue, Chicago, IL 60601"
+  },
+  {
+    "name": "FoodService Direct",
+    "email": "sales@foodservicedirect.com",
+    "phone": "+1-555-0789",
+    "address": "5600 Culinary Street, Las Vegas, NV 89101"
+  },
+  {
+    "name": "AutoParts Warehouse",
+    "email": "wholesale@autopartswarehouse.com",
+    "phone": "+1-555-0890",
+    "address": "7200 Automotive Way, Cleveland, OH 44101"
+  },
+  {
+    "name": "BuildRight Materials",
+    "email": "contractors@buildrightmaterials.com",
+    "phone": "+1-555-0901",
+    "address": "9100 Construction Plaza, Denver, CO 80201"
+  },
+  {
+    "name": "ElectroTech Components",
+    "email": "orders@electrotechcomponents.com",
+    "phone": "+1-555-1012",
+    "address": "4400 Circuit Drive, Boston, MA 02101"
+  },
+  {
+    "name": "PackageMax Solutions",
+    "email": "logistics@packagemaxsolutions.com",
+    "phone": "+1-555-1123",
+    "address": "6800 Shipping Lane, Memphis, TN 38101"
+  },
+  {
+    "name": "LabTech Scientific",
+    "email": "research@labtechscientific.com",
+    "phone": "+1-555-1234",
+    "address": "3500 Research Park, San Diego, CA 92101"
+  },
+  {
+    "name": "ComfortSpace Furniture",
+    "email": "commercial@comfortspacefurniture.com",
+    "phone": "+1-555-1345",
+    "address": "2800 Design Center, Seattle, WA 98101"
+  },
+  {
+    "name": "Climate Control Systems",
+    "email": "hvac@climatecontrolsystems.com",
+    "phone": "+1-555-1456",
+    "address": "5200 HVAC Boulevard, Miami, FL 33101"
+  },
+  {
+    "name": "Textile Pro Industries",
+    "email": "bulk@textileproindustries.com",
+    "phone": "+1-555-1567",
+    "address": "7600 Fabric Mill Road, Charlotte, NC 28201"
+  },
+  {
+    "name": "Global Trade Partners",
+    "email": "international@globaltradepartners.com",
+    "phone": "+1-555-1678",
+    "address": "1200 International Plaza, New York, NY 10001"
+  },
+  {
+    "name": "Precision Tools Inc.",
+    "email": "tools@precisiontools.com",
+    "phone": "+1-555-1789",
+    "address": "8900 Precision Way, Milwaukee, WI 53201"
+  },
+  {
+    "name": "EcoSupply Green",
+    "email": "sustainable@ecosupplygreen.com",
+    "phone": "+1-555-1890",
+    "address": "4100 Eco Drive, Portland, OR 97201"
+  },
+  {
+    "name": "Logistics Express",
+    "email": "fleet@logisticsexpress.com",
+    "phone": "+1-555-1901",
+    "address": "6300 Transport Hub, Kansas City, MO 64101"
+  },
+  {
+    "name": "Quality First Manufacturing",
+    "email": "quality@qualityfirstmfg.com",
+    "phone": "+1-555-2012",
+    "address": "3700 Quality Circle, Nashville, TN 37201"
+  }
+]
