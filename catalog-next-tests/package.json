@@ -1,0 +1,52 @@
+{
+  "name": "catalog-next-tests",
+  "version": "1.0.0",
+  "description": "Test suite for catalog-next Next.js application",
+  "private": true,
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "test:ci": "jest --ci --coverage --watchAll=false",
+    "test:components": "jest --testPathPattern=components",
+    "test:pages": "jest --testPathPattern=pages",
+    "test:api": "jest --testPathPattern=api",
+    "test:integration": "jest --testPathPattern=integration",
+    "test:unit": "jest --testPathPattern=unit",
+    "test:working": "jest tests/simple.test.js tests/components/Logo.test.tsx tests/unit/simple-utils.test.ts tests/api/simple-api.test.ts tests/pages/simple-page.test.tsx",
+    "test:validate": "jest --listTests"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.23.0",
+    "@babel/preset-env": "^7.23.0",
+    "@babel/preset-react": "^7.23.0",
+    "@babel/preset-typescript": "^7.23.0",
+    "@testing-library/jest-dom": "^6.1.4",
+    "@testing-library/react": "^14.3.1",
+    "@testing-library/user-event": "^14.5.1",
+    "@types/jest": "^29.5.14",
+    "@types/node": "^20.19.13",
+    "@types/react": "^18.2.66",
+    "@types/react-dom": "^18.2.22",
+    "babel-jest": "^29.7.0",
+    "identity-obj-proxy": "^3.0.0",
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "jest-fetch-mock": "^3.0.3",
+    "next": "^14.2.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "ts-jest": "^29.1.1",
+    "typescript": "^5.4.5"
+  },
+  "dependencies": {
+    "@popperjs/core": "^2.11.8",
+    "@types/react-slick": "^0.23.13",
+    "axios": "^1.12.0",
+    "bootstrap": "^5.3.8",
+    "react-bootstrap": "^2.10.10",
+    "react-icons": "^5.5.0",
+    "react-slick": "^0.31.0",
+    "slick-carousel": "^1.8.1"
+  }
+}
