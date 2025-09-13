@@ -39,7 +39,6 @@ const API = (process.env.NEXT_PUBLIC_API_BASE || 'http://localhost:1337') + '/ap
 
 async function getProduct(id: string): Promise<Product | null> {
   try {
-	debugger;
 	console.log('Fetching product:', id);
     const res = await fetch(`${API}/products/${id}?populate=*`, {
 
@@ -58,7 +57,7 @@ async function getProduct(id: string): Promise<Product | null> {
     
     const json = await res.json();
     console.log('Product API Response:', json); // Debug log
-	debugger;
+	
     return json.data ? { id: json.data.id, ...json.data } : null;
   } catch (error) {
     console.error('Error fetching product:', error);

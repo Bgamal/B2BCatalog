@@ -17,7 +17,7 @@ export default function SuppliersPage() {
           throw new Error('Failed to fetch suppliers');
         }
         const json = await response.json();
-        debugger;
+        
         // Safely map the response data with null checks
         const suppliers = (json?.data ?? [])
           .filter((item: any) => item?.id && item?.name)

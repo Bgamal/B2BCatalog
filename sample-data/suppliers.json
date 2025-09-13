@@ -1,0 +1,202 @@
+[
+  {
+    "name": "TechCorp Solutions",
+    "description": "Leading supplier of electronic components and IT hardware",
+    "contactEmail": "sales@techcorp.com",
+    "contactPhone": "+1-555-0101",
+    "website": "https://www.techcorp.com",
+    "address": {
+      "street": "123 Technology Drive",
+      "city": "San Francisco",
+      "state": "CA",
+      "zipCode": "94105",
+      "country": "USA"
+    },
+    "isActive": true,
+    "rating": 4.8,
+    "establishedYear": 1995,
+    "certifications": ["ISO 9001", "ISO 14001"],
+    "paymentTerms": "Net 30",
+    "minimumOrder": 500
+  },
+  {
+    "name": "Global Office Supply Co.",
+    "description": "Comprehensive office supplies and equipment distributor",
+    "contactEmail": "orders@globaloffice.com",
+    "contactPhone": "+1-555-0202",
+    "website": "https://www.globaloffice.com",
+    "address": {
+      "street": "456 Business Park Way",
+      "city": "Chicago",
+      "state": "IL",
+      "zipCode": "60601",
+      "country": "USA"
+    },
+    "isActive": true,
+    "rating": 4.5,
+    "establishedYear": 1988,
+    "certifications": ["FSC Certified"],
+    "paymentTerms": "Net 15",
+    "minimumOrder": 250
+  },
+  {
+    "name": "Industrial Equipment Partners",
+    "description": "Heavy machinery and industrial equipment specialist",
+    "contactEmail": "info@industrialpartners.com",
+    "contactPhone": "+1-555-0303",
+    "website": "https://www.industrialpartners.com",
+    "address": {
+      "street": "789 Manufacturing Blvd",
+      "city": "Detroit",
+      "state": "MI",
+      "zipCode": "48201",
+      "country": "USA"
+    },
+    "isActive": true,
+    "rating": 4.7,
+    "establishedYear": 1975,
+    "certifications": ["ISO 9001", "OSHA Certified"],
+    "paymentTerms": "Net 45",
+    "minimumOrder": 2000
+  },
+  {
+    "name": "SafeGuard Equipment Inc.",
+    "description": "Personal protective equipment and safety gear manufacturer",
+    "contactEmail": "safety@safeguard.com",
+    "contactPhone": "+1-555-0404",
+    "website": "https://www.safeguard.com",
+    "address": {
+      "street": "321 Safety Street",
+      "city": "Houston",
+      "state": "TX",
+      "zipCode": "77001",
+      "country": "USA"
+    },
+    "isActive": true,
+    "rating": 4.9,
+    "establishedYear": 1992,
+    "certifications": ["ANSI Certified", "NIOSH Approved"],
+    "paymentTerms": "Net 30",
+    "minimumOrder": 100
+  },
+  {
+    "name": "CleanPro Solutions",
+    "description": "Professional cleaning products and janitorial supplies",
+    "contactEmail": "sales@cleanpro.com",
+    "contactPhone": "+1-555-0505",
+    "website": "https://www.cleanpro.com",
+    "address": {
+      "street": "654 Clean Avenue",
+      "city": "Atlanta",
+      "state": "GA",
+      "zipCode": "30301",
+      "country": "USA"
+    },
+    "isActive": true,
+    "rating": 4.4,
+    "establishedYear": 2001,
+    "certifications": ["EPA Certified", "Green Seal"],
+    "paymentTerms": "Net 20",
+    "minimumOrder": 300
+  },
+  {
+    "name": "MedSupply Direct",
+    "description": "Medical equipment and healthcare supplies distributor",
+    "contactEmail": "orders@medsupply.com",
+    "contactPhone": "+1-555-0606",
+    "website": "https://www.medsupply.com",
+    "address": {
+      "street": "987 Healthcare Plaza",
+      "city": "Boston",
+      "state": "MA",
+      "zipCode": "02101",
+      "country": "USA"
+    },
+    "isActive": true,
+    "rating": 4.8,
+    "establishedYear": 1985,
+    "certifications": ["FDA Registered", "ISO 13485"],
+    "paymentTerms": "Net 30",
+    "minimumOrder": 1000
+  },
+  {
+    "name": "AutoParts Wholesale",
+    "description": "Automotive parts and accessories supplier",
+    "contactEmail": "wholesale@autoparts.com",
+    "contactPhone": "+1-555-0707",
+    "website": "https://www.autoparts.com",
+    "address": {
+      "street": "147 Motor Way",
+      "city": "Phoenix",
+      "state": "AZ",
+      "zipCode": "85001",
+      "country": "USA"
+    },
+    "isActive": true,
+    "rating": 4.3,
+    "establishedYear": 1998,
+    "certifications": ["ASE Certified"],
+    "paymentTerms": "Net 25",
+    "minimumOrder": 500
+  },
+  {
+    "name": "BuildRight Materials",
+    "description": "Construction materials and building supplies distributor",
+    "contactEmail": "sales@buildright.com",
+    "contactPhone": "+1-555-0808",
+    "website": "https://www.buildright.com",
+    "address": {
+      "street": "258 Construction Court",
+      "city": "Denver",
+      "state": "CO",
+      "zipCode": "80201",
+      "country": "USA"
+    },
+    "isActive": true,
+    "rating": 4.6,
+    "establishedYear": 1982,
+    "certifications": ["LEED Certified"],
+    "paymentTerms": "Net 30",
+    "minimumOrder": 1500
+  },
+  {
+    "name": "FoodService Pro",
+    "description": "Commercial kitchen equipment and food service supplies",
+    "contactEmail": "commercial@foodservicepro.com",
+    "contactPhone": "+1-555-0909",
+    "website": "https://www.foodservicepro.com",
+    "address": {
+      "street": "369 Culinary Lane",
+      "city": "Las Vegas",
+      "state": "NV",
+      "zipCode": "89101",
+      "country": "USA"
+    },
+    "isActive": true,
+    "rating": 4.7,
+    "establishedYear": 1990,
+    "certifications": ["NSF Certified", "UL Listed"],
+    "paymentTerms": "Net 30",
+    "minimumOrder": 750
+  },
+  {
+    "name": "EcoGreen Supplies",
+    "description": "Sustainable and eco-friendly business supplies",
+    "contactEmail": "green@ecogreen.com",
+    "contactPhone": "+1-555-1010",
+    "website": "https://www.ecogreen.com",
+    "address": {
+      "street": "741 Sustainability Street",
+      "city": "Portland",
+      "state": "OR",
+      "zipCode": "97201",
+      "country": "USA"
+    },
+    "isActive": true,
+    "rating": 4.9,
+    "establishedYear": 2005,
+    "certifications": ["B Corp Certified", "Carbon Neutral"],
+    "paymentTerms": "Net 15",
+    "minimumOrder": 200
+  }
+]

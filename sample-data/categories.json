@@ -1,0 +1,72 @@
+[
+  {
+    "name": "Electronics",
+    "description": "Electronic devices and components for various applications",
+    "slug": "electronics",
+    "isActive": true,
+    "sortOrder": 1
+  },
+  {
+    "name": "Office Supplies",
+    "description": "Essential supplies for office and workplace environments",
+    "slug": "office-supplies",
+    "isActive": true,
+    "sortOrder": 2
+  },
+  {
+    "name": "Industrial Equipment",
+    "description": "Heavy machinery and industrial equipment for manufacturing",
+    "slug": "industrial-equipment",
+    "isActive": true,
+    "sortOrder": 3
+  },
+  {
+    "name": "Safety Equipment",
+    "description": "Personal protective equipment and safety gear",
+    "slug": "safety-equipment",
+    "isActive": true,
+    "sortOrder": 4
+  },
+  {
+    "name": "Cleaning Supplies",
+    "description": "Professional cleaning products and janitorial supplies",
+    "slug": "cleaning-supplies",
+    "isActive": true,
+    "sortOrder": 5
+  },
+  {
+    "name": "IT Hardware",
+    "description": "Computer hardware, networking equipment, and IT infrastructure",
+    "slug": "it-hardware",
+    "isActive": true,
+    "sortOrder": 6
+  },
+  {
+    "name": "Medical Supplies",
+    "description": "Healthcare and medical equipment and supplies",
+    "slug": "medical-supplies",
+    "isActive": true,
+    "sortOrder": 7
+  },
+  {
+    "name": "Automotive Parts",
+    "description": "Vehicle parts, accessories, and maintenance supplies",
+    "slug": "automotive-parts",
+    "isActive": true,
+    "sortOrder": 8
+  },
+  {
+    "name": "Construction Materials",
+    "description": "Building materials and construction supplies",
+    "slug": "construction-materials",
+    "isActive": true,
+    "sortOrder": 9
+  },
+  {
+    "name": "Food Service",
+    "description": "Commercial kitchen equipment and food service supplies",
+    "slug": "food-service",
+    "isActive": true,
+    "sortOrder": 10
+  }
+]
