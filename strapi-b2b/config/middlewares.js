@@ -1,4 +1,14 @@
 module.exports = [
+  // Custom request logging middleware (before errors)
+  {
+    name: 'global::request-logger',
+    config: {},
+  },
+  // Custom error handling middleware (after request logging)
+  {
+    name: 'global::error-handler',
+    config: {},
+  },
   'strapi::errors',
   {
     name: 'strapi::security',
