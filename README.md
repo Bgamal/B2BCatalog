@@ -420,6 +420,37 @@ View detailed test results and coverage analysis in [COVERAGE_REPORT.md](./COVER
 
 ---
 
+## 🛠️ Tools Used
+
+This B2B Catalog solution was developed using modern development tools and AI-powered assistance to ensure high-quality code and efficient development workflow.
+
+### Development Environment & AI Tools
+- **🤖 Windsurf AI**: Primary AI coding assistant for project architecture, code generation, and implementation guidance
+- **🎯 Cursor AI**: Secondary AI tool for code optimization, debugging, and feature enhancement
+- **💻 PowerShell**: Command-line interface for project setup, testing, and deployment automation
+- **📝 Visual Studio Code**: Primary code editor with AI integration capabilities
+
+### AI-Assisted Development Features
+- **Code Generation**: Automated creation of React components, API controllers, and database services
+- **Error Handling**: AI-guided implementation of comprehensive logging and error management systems
+- **Testing Strategy**: AI-assisted test suite development with coverage optimization
+- **Documentation**: Automated generation of comprehensive README and coverage reports
+- **Best Practices**: AI recommendations for code structure, security, and performance optimization
+
+### Command Line Tools
+- **PowerShell Scripts**: Automated testing, build processes, and deployment workflows
+- **npm/Node.js**: Package management and script execution
+- **Git**: Version control with AI-assisted commit message generation
+
+### AI Development Workflow
+1. **Planning**: AI-assisted project structure and feature planning
+2. **Implementation**: Code generation with real-time AI suggestions
+3. **Testing**: Automated test creation and coverage analysis
+4. **Documentation**: AI-generated technical documentation and user guides
+5. **Optimization**: Performance and security improvements through AI recommendations
+
+---
+
 ## 📈 Future Enhancements(Next Steps)
 
 - User authentication and authorization
