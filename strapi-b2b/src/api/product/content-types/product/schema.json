@@ -1,22 +1,78 @@
 {
-	"collectionName": "products",
-	"info": { "singularName": "product", "pluralName": "products", "displayName": "Product" },
-	"options": { "draftAndPublish": false },
-	"attributes": {
-		"name": { "type": "string", "required": true },
-		"sku": { "type": "string", "required": true, "unique": true },
-		"description": { "type": "text" },
-		"price": { "type": "decimal", "required": true },
-		"wholesalePrice": { "type": "decimal" },
-		"stock": { "type": "integer", "required": true },
-		"minOrderQuantity": { "type": "integer", "default": 1 },
-		"maxOrderQuantity": { "type": "integer" },
-		"viewCount": { "type": "integer", "default": 0 },
-		"isActive": { "type": "boolean", "default": true },
-		"images": { "type": "media", "multiple": true, "allowedTypes": ["images"] },
-		"specifications": { "type": "json" },
-		"tags": { "type": "json" },
-		"category": { "type": "relation", "relation": "manyToOne", "target": "api::category.category", "inversedBy": "products", "required": true },
-		"supplier": { "type": "relation", "relation": "manyToOne", "target": "api::supplier.supplier", "inversedBy": "products", "required": true }
-	}
+  "kind": "collectionType",
+  "collectionName": "products",
+  "info": {
+    "singularName": "product",
+    "pluralName": "products",
+    "displayName": "Product"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "sku": {
+      "type": "string",
+      "required": true,
+      "unique": true
+    },
+    "description": {
+      "type": "text"
+    },
+    "price": {
+      "type": "decimal",
+      "required": true
+    },
+    "wholesalePrice": {
+      "type": "decimal"
+    },
+    "stock": {
+      "type": "integer",
+      "required": true
+    },
+    "minOrderQuantity": {
+      "type": "integer",
+      "default": 1
+    },
+    "maxOrderQuantity": {
+      "type": "integer"
+    },
+    "viewCount": {
+      "type": "integer",
+      "default": 0
+    },
+    "isActive": {
+      "type": "boolean",
+      "default": true
+    },
+    "images": {
+      "type": "media",
+      "multiple": true,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "specifications": {
+      "type": "json"
+    },
+    "tags": {
+      "type": "json"
+    },
+    "category": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::category.category",
+      "mappedBy": "product"
+    },
+    "supplier": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::supplier.supplier",
+      "inversedBy": "product"
+    }
+  }
 }

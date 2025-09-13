@@ -140,12 +140,8 @@ type Product = {
     updatedAt: string;
     publishedAt: string;
     images: Image[];
-    category: {
-      data: Category | null;
-    };
-    supplier: {
-      data: Supplier | null;
-    };
+    category: Category | null;
+    supplier: Supplier | null;
  
 };
 
@@ -197,28 +193,16 @@ export default function ProductsPage() {
         setIsLoading(true);
         setError(null);
 
-        // Log the API URL being used
-        console.log('Fetching data from API:', API_URL);
-        
-        // // Check if API is reachable
-        // const isApiReachable = await fetch(API_URL, { method: 'HEAD' })
-        //   .then(res => res.ok)
-        //   .catch(() => false);
-
-        // if (!isApiReachable) {
-        //   console.error('API server is not running or not reachable at', API_URL);
-        //   setError('Unable to connect to the server. Please make sure the Strapi server is running.');
-        //   setIsLoading(false);
-        //   return;
-        // }
-
-        // Fetch products with related data
+        // Always fetch all products first to ensure we have complete data
+        // Then apply filtering client-side for reliability
         const endpoints = [
-          { name: 'products', url: `${API_URL}/products?populate=*`, required: true },
+          { name: 'products', url: `${API_URL}/products?populate=*&pagination[pageSize]=100`, required: true },
           { name: 'categories', url: `${API_URL}/categories`, required: false },
           { name: 'suppliers', url: `${API_URL}/suppliers`, required: false }
         ];
-        console.log('Fetching data from API:', endpoints[0].url);
+        
+        console.log('Fetching all products from:', endpoints[0].url);
+        console.log('Will apply filters client-side for:', { categoryId, supplierId, q });
 
         const responses = await Promise.allSettled(
           endpoints.map(endpoint => 
@@ -256,15 +240,14 @@ export default function ProductsPage() {
         // Process products data
         const productsData = productsRes?.data || [];
         const categoriesData = categoriesRes?.data || [];
-        const suppliersData = suppliersRes?.data || [];
         
-        console.log('Products:', productsData);
-        console.log('Categories:', categoriesData);
-        console.log('Suppliers:', suppliersData);
+        console.log('API Response - Products count:', productsData.length);
+        console.log('API Response - Categories count:', categoriesData.length);
+        console.log('API Response - First few products:', productsData.slice(0, 3));
         
         setProducts(Array.isArray(productsData) ? productsData : []);
         setCategories(Array.isArray(categoriesData) ? categoriesData : []);
-        setSuppliers(Array.isArray(suppliersData) ? suppliersData : []);
+        setSuppliers(suppliersRes?.data || []);
       } catch (err) {
         console.error('Error fetching data:', err);
         setError('Failed to load products. Please try again later.');
@@ -276,7 +259,7 @@ export default function ProductsPage() {
     fetchData();
   }, []);
 
-  // Filter and sort products
+  // Filter and sort products (now using client-side filtering for reliability)
   const filteredProducts = useMemo(() => {
     if (!products || !Array.isArray(products)) return [];
 
@@ -284,18 +267,24 @@ export default function ProductsPage() {
       .filter(product => {
         if (!product) return false;
         
+        // Search filter
         const searchTerm = q?.toLowerCase() || '';
         const productName = product.name?.toLowerCase() || '';
         const productSku = product.sku?.toLowerCase() || '';
         const productDescription = product.description?.toLowerCase() || '';
         
-        const matchesSearch = 
+        const matchesSearch = !q || 
           productName.includes(searchTerm) ||
           productSku.includes(searchTerm) ||
           productDescription.includes(searchTerm);
         
-        const matchesCategory = !categoryId || product.category?.data?.id === categoryId;
-        const matchesSupplier = !supplierId || product.supplier?.data?.id === supplierId;
+        // Category filter
+        const matchesCategory = !categoryId || product.category?.id === categoryId;
+        
+        // Supplier filter
+        const matchesSupplier = !supplierId || product.supplier?.id === supplierId;
+        
+        // Price range filter
         const productPrice = product.price || 0;
         const matchesPrice = productPrice >= priceRange[0] && productPrice <= priceRange[1];
         

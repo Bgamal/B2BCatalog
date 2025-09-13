@@ -1,10 +1,30 @@
 {
-	"collectionName": "categories",
-	"info": { "singularName": "category", "pluralName": "categories", "displayName": "Category" },
-	"options": { "draftAndPublish": false },
-	"attributes": {
-		"name": { "type": "string", "required": true },
-		"slug": { "type": "uid", "targetField": "name", "required": false },
-		"products": { "type": "relation", "relation": "oneToMany", "target": "api::product.product", "mappedBy": "category" }
-	}
+  "kind": "collectionType",
+  "collectionName": "categories",
+  "info": {
+    "singularName": "category",
+    "pluralName": "categories",
+    "displayName": "Category"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "slug": {
+      "type": "uid",
+      "targetField": "name",
+      "required": false
+    },
+    "product": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::product.product",
+      "inversedBy": "category"
+    }
+  }
 }

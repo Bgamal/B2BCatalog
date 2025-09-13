@@ -21,6 +21,7 @@ export default function Navigation({ children }: { children: React.ReactNode }) 
               <Nav.Link as={Link} href="/products">Products</Nav.Link>
               <Nav.Link as={Link} href="/categories">Categories</Nav.Link>
               <Nav.Link as={Link} href="/suppliers">Suppliers</Nav.Link>
+              <Nav.Link as={Link} href="/trending">Trending</Nav.Link>
               <Nav.Link as={Link} href="/analytics">Analytics</Nav.Link>
             </Nav>
             <Nav>

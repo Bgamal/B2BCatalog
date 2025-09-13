@@ -1,10 +1,28 @@
 {
-	"collectionName": "suppliers",
-	"info": { "singularName": "supplier", "pluralName": "suppliers", "displayName": "Supplier" },
-	"options": { "draftAndPublish": false },
-	"attributes": {
-		"name": { "type": "string", "required": true },
-		"contactEmail": { "type": "email" },
-		"products": { "type": "relation", "relation": "oneToMany", "target": "api::product.product", "mappedBy": "supplier" }
-	}
-} 
+  "kind": "collectionType",
+  "collectionName": "suppliers",
+  "info": {
+    "singularName": "supplier",
+    "pluralName": "suppliers",
+    "displayName": "Supplier"
+  },
+  "options": {
+    "draftAndPublish": false
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "name": {
+      "type": "string",
+      "required": true
+    },
+    "contactEmail": {
+      "type": "email"
+    },
+    "product": {
+      "type": "relation",
+      "relation": "oneToOne",
+      "target": "api::product.product",
+      "mappedBy": "supplier"
+    }
+  }
+}

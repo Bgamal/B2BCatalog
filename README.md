@@ -743,6 +743,8 @@ This B2B Catalog solution was developed using modern development tools and AI-po
 - Advanced search with Elasticsearch
 - Real-time inventory updates
 - Bulk product import/export
+- Current relation between product and category, product and     supplier are one to one, will be modifed to be one to many
+- Trending and most viewed products now implemented in the front  only (fetcheing data correctly from the db), but the count of view functionality will be implemented
 
 ---
 
