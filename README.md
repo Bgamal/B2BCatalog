@@ -735,7 +735,7 @@ This B2B Catalog solution was developed using modern development tools and AI-po
 
 ## 📈 Future Enhancements(Next Steps)
 
-- User authentication and authorization
+- User authentication and authorization in the client side(already added in the strapi backend)
 - Shopping cart and checkout functionality
 - Order management system
 - Advanced analytics and reporting
