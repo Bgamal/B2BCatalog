@@ -71,7 +71,7 @@ The B2B Catalog Solution is a full-stack web application designed to streamline 
 - **⭐ Product Rating System**: Customer feedback and rating system for informed purchasing decisions
 - **📈 Inventory Tracking**: Real-time stock monitoring with low-stock alerts and out-of-stock notifications
 - **🖼️ Image Gallery**: Multi-image product galleries with carousel functionality
-- **🎯 Trending Products**: Most viewed and popular product recommendations
+- **🎯 Trending Products**: Most viewed and popular product recommendations in client side only
 
 ## 📁 Project Structure
 
@@ -802,6 +802,8 @@ This B2B Catalog solution was developed using modern development tools and AI-po
 - Trending and most viewed products now implemented in the front  only (fetcheing data correctly from the db), but the count of view functionality will be implemented
 - Localized Content Creation: create multiple versions of content in different languages
 - SEO Optimization: Locale-specific URLs, metadata, and canonical tags help boost international SEO
+- Product Rating System: Customer feedback and rating system for informed purchasing decisions
+- 📈 Inventory Tracking: Real-time stock monitoring with low-stock alerts and out-of-stock notifications
 
 
 
