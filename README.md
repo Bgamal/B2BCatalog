@@ -51,7 +51,6 @@ A comprehensive B2B e-commerce platform built with modern web technologies, feat
   - [AI-Assisted Development Features](#ai-assisted-development-features)
   - [Command Line Tools](#command-line-tools)
   - [AI Development Workflow](#ai-development-workflow)
-- [📊 Coverage Report](#-coverage-report)
 - [📈 Future Enhancements (Next Steps)](#-future-enhancements-next-steps)
 - [🤝 Contributing](#-contributing)
 - [📄 License](#-license)
